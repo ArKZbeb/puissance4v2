@@ -73,7 +73,7 @@ font-family: 'Arimo Bold';
     --homepage-banner-horizontal-padding: 20%;
     --page-horizontal-padding: 12%;
     --button-padding: 24px;
-    --form-input-padding: 20px;
+    --form-input-padding: 0.5vw;
 
     --footer-content-vertical-padding: 4%;
     --footer-copyrights-vertical-padding: 0.5%;
@@ -155,7 +155,6 @@ form {
     flex-direction: column;
     justify-content: center;
 
-
     width: 100%;
 }
 
@@ -171,7 +170,7 @@ input[type = "text"], input[type = "email"], input[type = "password"], textarea,
 
     /* width: 100%; */
     padding: var(--form-input-padding);
-    margin-bottom: 24px;
+    margin-bottom: 2%;
 }
 
 /* ----------------------------------------------------------------- */
@@ -226,11 +225,8 @@ nav a:hover {
 
 /* ----------------------------------------------------------------- */
 /* Banner */
-#banner:not(.landing) {
+.banner {
     background-image: linear-gradient(var(--banner-color-filter), var(--banner-color-filter)), url("images/banner.jpg");
-}
-
-#banner {
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
@@ -357,7 +353,7 @@ footer p, footer li {
 }
 
 /* Landing Section */
-.landing {
+#homepage-banner {
     background-image: linear-gradient(var(--banner-color-filter), var(--banner-color-filter)), url("images/landing.jpg");
 
     padding: 16% var(--homepage-banner-horizontal-padding);
@@ -368,11 +364,11 @@ footer p, footer li {
     align-items: center;
 }
 
-.landing h2 {
+#homepage-banner h2 {
     font-size: min(calc(var(--banner-font-size) * 1.25), var(--banner-max-font-size));
 }
 
-.landing p {
+#homepage-banner p {
     font-size: 1.6em;
     margin-top: -12px;
 
@@ -622,7 +618,7 @@ footer p, footer li {
 }
 
 #name-and-mail input {
-    width: 100%;
+    width: 50%;
 }
 
 #name-and-mail input[name="name"] {
@@ -633,3 +629,74 @@ footer p, footer li {
     resize: vertical; /* Prevent hozizontal resizing */
     min-height: 200px;
 }
+
+/* ----------------------------------------------------------------- */
+/* Scores */
+
+#leaderboard {
+    padding-top: 4%;
+    padding-bottom: 4%;
+
+    text-align: center;
+}
+
+#leaderboard-header {
+    display: flex;
+    justify-content: space-between;
+
+    border-bottom: 4px solid var(--highlight-color);
+    padding-bottom: 1%;
+    padding-left: calc(6.5% + 6vw);
+    padding-right: 4.5%;
+    margin-bottom: 2%;
+}
+
+.player-stats-display {
+    background-color: var(--information-background-color);
+    color: var(--title-color);
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 2% 4%;
+    margin: 0 0 1%;
+}
+
+.player-stats-display img {
+    width: 6vw;
+    height: auto;
+    border-radius: 50%;
+
+    margin-right: 2%;
+}
+
+.player-stats-display strong {
+    color: white;
+}
+
+.player-stats-display:not(#self-stats) {
+    opacity: 0.6;
+}
+
+.top1 {background-color: #a18900;}
+.top2 {background-color: #c0c0c0;}
+.top3 {background-color: #cd7f32;}
+
+.player-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+}
+
+.stat {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.stat:first-child > span { margin-right: auto; }
+.stat:last-child > span { margin-left: auto;  }
