@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+    <title>The Power Of Memory</title>
+</head>
+<body>
+    <header>
+        <h1>The Power Of Memory</h1>
+        <nav>
+            <ul>
+                <li><a href="main.html">ACCUEIL</a></li>
+                <li><a href="signup.html">JEU</a></li>
+                <li><a href="scores.html">SCORES</a></li>
+                <li><a href="contact.html">NOUS CONTACTER</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <a href="#banner"><button id="fixed-button">⏏</button></a>
+
+    <main>
+        <section id="banner">
+            <h2>NOUS CONTACTER</h2>
+        </section>
+
+        <section id="contact-info">
+            <a href="tel: +33605040302"><article class="contact-info-display">
+                <div class="image-container"><img src="images/phone.png" alt="Icon of a smartphone"/></div>
+                <p>06 05 04 03 02</p>
+            </article></a>
+
+            <a href="mailto: support@powerofmemory"><article class="contact-info-display">
+                <div class="image-container"><img src="images/mail.png" alt="Icon of an enveloppe"/></div>
+                <p>support@powerofmemory</p>
+            </article></a>
+
+            <a href="https://www.google.com/maps/place/Paris" target="_blank"><article class="contact-info-display">
+                <div class="image-container"><img src="images/position.png" alt="Icon of a pin"/></div>
+                <p>Paris</p>
+            </article></a>
+        </section>
+
+        <section id="contact-form">
+            <form action="signup.php" method="POST">
+                <div id="name-and-mail">
+                    <input type="text" name="name" id="name" placeholder="Nom" required>
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                </div>
+                <input type="text" name="object" id="object" placeholder="Sujet" required>
+                <textarea name="message" id="message" placeholder="Message" required></textarea>
+
+                <!-- <button type="submit" name="signup-submit">Envoyer</button> -->
+            </form>
+            <a href="login.html"><button>Envoyer</button></a>
+        </section>
+    </main>
+
+    <footer>
+        <div id="footer-content">
+            <div id="infos">
+                <h4>Information</h4>
+
+                <p>Quisque commodo facilisis purus, interdum volutpat arcu viverra sed.</p>
+                <p><strong>Tel :</strong> <a href="tel: +33605040302">06 05 04 03 02</a></p>
+                <p><strong>Email :</strong> <a href="mailto: support@powerofmemory.com">support@powerofmemory.com</a></p>
+                <p><strong>Location :</strong> <a href="https://www.google.com/maps/place/Paris" target="_blank">Paris</a></p>
+
+                <div class="social-medias">
+                    <a href="https://www.facebook.com" target="_blank"><img src="images/facebook.png" alt="Facebook logo"/></a>
+                    <a href="https://www.twitter.com" target="_blank"><img src="images/twitter.png" alt="Twitter logo"/></a>
+                    <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank"><img src="images/youtube.png" alt="Youtube logo"/></a>
+                    <a href="https://www.pinterest.com" target="_blank"><img src="images/pinterest.png" alt="Pinterest logo"/></a>
+                    <a href="https://www.instagram.com" target="_blank"><img src="images/instagram.png" alt="Instagram logo"/></a>
+                </div>
+            </div>
+
+            <div id="nav">
+                <h4>Power Of Memory</h4>
+
+                <ul>
+                    <li><a href="signup.html">Jouer !</a></li>
+                    <li><a href="scores.html">Les scores</a></li>
+                    <li><a href="contact.html">Nous contacter</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="copyrights">
+            <p>Copyrights © 2022 Tous droits réservés</p>
+        </div>
+    </footer>
+</body>
+</html>
