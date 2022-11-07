@@ -1,3 +1,5 @@
+/* Pour trouver une partie : Ctrl/Cmd + F, puis taper "* partie" (sans ") */
+
 /* ----------------------------------------------------------------- */
 /* Fonts */
 @font-face { /* Header */
@@ -698,4 +700,48 @@ footer p, footer li {
 }
 
 .stat:first-child > span { margin-right: auto; }
-.stat:last-child > span { margin-left: auto;  }
+.stat:last-child > span { margin-left: auto; }
+
+/* ----------------------------------------------------------------- */
+/* Profile page */
+#my-profile {
+    background-color: var(--highlight-background-color);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+#my-profile-pic {
+    padding: 4px;
+    border: 8px solid var(--highlight-color);
+    border-radius: 50%;
+    width: 12vw;
+    height: 12vw;
+    min-width: 200px;
+    min-height: 200px;
+    max-width: 400px;
+    max-height: 400px;
+
+    margin: 4% auto;
+    margin-bottom: 1%;
+}
+
+#my-profile-pic > img {
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+#my-bio {
+
+    resize: none;
+    max-lines: 2;
+    text-align: center;
+    width: 50%;
+}
+
