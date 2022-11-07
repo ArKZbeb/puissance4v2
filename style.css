@@ -10,12 +10,12 @@ font-family: 'Arimo Bold';
     src: url('fonts/Aspira Black.otf');
 }
 
-@font-face { /* sub-tile & buttons */ 
+@font-face { /* sub-title & buttons */ 
     font-family: 'Trenda Bold';
     src: url('fonts/Trenda-Bold.otf');
 }
 
-@font-face { /* sub-tile number */
+@font-face { /* sub-title number */
     font-family: 'Averta Standard Bold';
     src: url('fonts/AvertaStd-Bold.ttf');
 }
@@ -158,7 +158,7 @@ form {
     width: 100%;
 }
 
-input[type = "text"], input[type = "email"], input[type = "password"], textarea,input:not(submit) {
+textarea, input {
     border: none;
     border-bottom: 2px solid var(--highlight-color);
     border-radius: var(--form-input-border-radius) var(--form-input-border-radius) 0 0; /* Only top corners are rounded */
@@ -210,8 +210,8 @@ nav li {
     list-style: none;
 }
 
-nav li:not(:last-child) {/* Add space to the right of each image except the last one */
-    margin-right: 32px;
+nav li {/* Add space to the right of each image except the last one */
+    margin-left: 32px;
 }
 
 nav a {
@@ -405,7 +405,6 @@ footer p, footer li {
 /* Text */
 .list-text {
     display: flex;
-    flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
     align-content: center;
