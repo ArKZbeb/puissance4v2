@@ -1,5 +1,0 @@
-Retourne la colonne "nom du joueur"
-SELECT Pseudo FROM `utilisateur`;
-
-
-SELECT Msg FROM `Message`;
