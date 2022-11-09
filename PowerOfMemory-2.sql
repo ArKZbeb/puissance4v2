@@ -136,7 +136,8 @@ ALTER TABLE `Score`
 --
 ALTER TABLE `Utilisateur`
   ADD PRIMARY KEY (`Identi`),
-  ADD UNIQUE KEY `Email` (`Email`,`Pseudo`);
+  ADD UNIQUE KEY (`Email`);
+  ADD UNIQUE KEY (`Pseudo`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
