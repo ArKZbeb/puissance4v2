@@ -1,2 +1,7 @@
 Retourne la colonne "nom du joueur"
 SELECT Pseudo FROM `utilisateur`;
+
+
+Récuperer que les dernieres message "apres 24 heure"
+
+SELECT * FROM `message` WHERE DateHeureMsg >= now() - INTERVAL 1 DAY;
