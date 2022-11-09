@@ -136,6 +136,10 @@ ALTER TABLE `Score`
 --
 -- Index pour la table `Utilisateur`
 --
+
+ALTER TABLE `Utilisateur` CHANGE `DateHeureInscri` `DateHeureInscri` 
+DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
 ALTER TABLE `Utilisateur`
   ADD PRIMARY KEY (`Identi`),
   ADD UNIQUE KEY `Email` (`Email`,`Pseudo`);
@@ -159,6 +163,9 @@ ALTER TABLE `Message`
 --
 -- AUTO_INCREMENT pour la table `Score`
 --
+ALTER TABLE `Score` CHANGE `DateHeurePartie` `DateHeurePartie` 
+DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
 ALTER TABLE `Score`
   MODIFY `IdentiScore` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
@@ -175,6 +182,9 @@ ALTER TABLE `Utilisateur`
 --
 -- Contraintes pour la table `Message`
 --
+ ALTER TABLE `Message` CHANGE `DateHeureMsg` `DateHeureMsg` 
+ DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ 
 ALTER TABLE `Message`
   ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`IdJeu`) REFERENCES `Jeux` (`IdJeu`),
   ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`IdExpe`) REFERENCES `Utilisateur` (`Identi`);
