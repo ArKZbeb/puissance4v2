@@ -1,0 +1,2 @@
+Retourne la colonne "nom du joueur"
+SELECT Pseudo FROM `utilisateur`;
