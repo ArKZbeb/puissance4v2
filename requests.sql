@@ -26,7 +26,7 @@ SELECT IdJoueur, ScorePartie
 FROM Score
 WHERE ScorePartie = ( SELECT MAX(ScorePartie) FROM Score WHERE IdJoueur = 10 );
 
---fonction pour évit
+--fonction pour éviter les doublons--
 if($nouveauScore<= $bestscoredujoueur){
     $updatebestscore()
 }else{
