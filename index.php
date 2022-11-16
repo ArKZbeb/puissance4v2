@@ -1,3 +1,24 @@
+<?php
+require('includes/database.inc.php');
+
+$database = connectDatabase();
+
+$sql = "SELECT Pseudo FROM `Utilisateur`";
+$request = $database->query($sql);
+
+if ($request->rowCount() > 0) {
+    // output data of each row
+    while ($row = $request->fetch()) {
+        echo "Pseudo : " . $row["Pseudo"] . "<br>";
+    }
+} else {
+    echo "0 results";
+}
+
+$sql = "INSERT INTO `Utilisateur`(`Identi`, `Email`, `Mdp`, `Pseudo`, `DateHeureInscri`, `DateHconnexion`) VALUES (NULL ,'test@gmail.com','BeauGosse','12345','2022-11-09', NULL)";
+$database->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,9 +32,7 @@
 </head>
 
 <body>
-    <?php
-    include 'view/header.inc.php'
-        ?>
+
 
     <a href="#homepage-banner"><button id="fixed-button">⏏</button></a>
 
