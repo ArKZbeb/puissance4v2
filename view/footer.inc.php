@@ -38,9 +38,9 @@
             <h4>Power Of Memory</h4>
 
             <ul>
-                <li><a href="register.html">Jouer !</a></li>
-                <li><a href="scores.html">Les scores</a></li>
-                <li><a href="contact.html">Nous contacter</a></li>
+                <li><a href="register.php">Jouer !</a></li>
+                <li><a href="scores.php">Les scores</a></li>
+                <li><a href="contact.php">Nous contacter</a></li>
             </ul>
         </div>
     </div>

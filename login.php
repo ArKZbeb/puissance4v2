@@ -67,7 +67,7 @@
                 <input type="password" name="password" id="password" placeholder="Mot de passe" required />
                 <!-- <button type="submit" name="signup-submit">Connexion</button> -->
             </form>
-            <a href="memory.html"><button>Connexion</button></a>
+            <a href="memory.php"><button>Connexion</button></a>
         </section>
     </main>
 

@@ -12,8 +12,8 @@
 
 <body>
     <?php
-        include 'view/header.inc.php'
-            ?>
+    include 'view/header.inc.php'
+        ?>
 
     <a href="#signup-banner"><button id="fixed-button">⏏</button></a>
 
@@ -31,13 +31,13 @@
                     placeholder="Confirmez le mot de passe" required />
                 <!-- <button type="submit" name="signup-submit">Inscription</button> -->
             </form>
-            <a href="login.html"><button>Inscription</button></a>
+            <a href="login.php"><button>Inscription</button></a>
         </section>
     </main>
 
     <?php
-        include 'view/footer.inc.php'
-            ?>
+    include 'view/footer.inc.php'
+        ?>
 </body>
 
 </html>
