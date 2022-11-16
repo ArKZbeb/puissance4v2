@@ -15,7 +15,8 @@ if ($request->rowCount() > 0) {
     echo "0 results";
 }
 
-$sql = "INSERT INTO `Utilisateur`(`Identi`, `Email`, `Mdp`, `Pseudo`, `DateHeureInscri`, `DateHconnexion`) VALUES (NULL ,'test@gmail.com','BeauGosse','12345','2022-11-09', NULL)";
+$sql = "INSERT IGNORE INTO `Utilisateur`(`Identi`, `Email`, `Mdp`, `Pseudo`, `DateHeureInscri`, `DateHconnexion`) VALUES (NULL ,'test@gmail.com','12345','BeauGosseDu69','2022-11-09', NULL)";
+// Le IGNORE est important, car il empêche l'ajout de doublons
 $database->query($sql);
 ?>
 
@@ -32,7 +33,9 @@ $database->query($sql);
 </head>
 
 <body>
-
+    <?php
+    include 'view/header.inc.php';
+    ?>
 
     <a href="#homepage-banner"><button id="fixed-button">⏏</button></a>
 
