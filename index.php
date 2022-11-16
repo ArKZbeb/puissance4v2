@@ -22,21 +22,21 @@
             <h2>BIENVENUE DANS NOTRE STUDIO !</h2>
             <p>Venez challenger les cerveaux les plus agiles !</p>
 
-            <a href="signup.html"><button id="play-button">JOUER !</button></a>
+            <a href="register.php"><button id="play-button">JOUER !</button></a>
         </section>
 
         <section id="intro">
             <div class="images">
                 <div class="img1">
-                    <img src="images/retro.jpg" alt="Picture of retro devices" />
+                    <img src="assets/images/retro.jpg" alt="Picture of retro devices" />
                 </div>
 
                 <div class="img2">
-                    <img src="images/dabbing-man.jpg" alt="Picture of retro devices" />
+                    <img src="assets/images/dabbing-man.jpg" alt="Picture of retro devices" />
                 </div>
 
                 <div class="img3">
-                    <img src="images/poker.jpg" alt="Picture of retro devices" />
+                    <img src="assets/images/poker.jpg" alt="Picture of retro devices" />
                 </div>
             </div>
 
@@ -79,7 +79,7 @@
         </section>
 
         <section id="stats">
-            <img src="images/wd2.jpg" alt="Cover of the game Watch Dogs 2" />
+            <img src="assets/images/wd2.jpg" alt="Cover of the game Watch Dogs 2" />
 
             <div class="stats-container">
                 <div class="stats-row">
@@ -113,53 +113,53 @@
             <h3>Notre Équipe</h3>
             <p>Quisque commodo facilisis purus, interdum volutpat arcu viverra sed.</p>
 
-            <img src="images/ornament.svg" id="ornament" />
+            <img src="assets/images/ornament.svg" id="ornament" />
 
             <div class="team">
                 <article class="person-display">
-                    <img src="images/hamilton.jpg" alt="Picture of Hamilton" />
+                    <img src="assets/images/hamilton.jpg" alt="Picture of Hamilton" />
 
                     <h4>HAMILTON</h4>
                     <p>Game Developer</p>
 
                     <div class="social-medias person-social">
-                        <a href="https://www.facebook.com" target="_blank"><img src="images/facebook.png"
+                        <a href="https://www.facebook.com" target="_blank"><img src="assets/images/facebook.png"
                                 alt="Facebook logo" /></a>
-                        <a href="https://www.twitter.com" target="_blank"><img src="images/twitter.png"
+                        <a href="https://www.twitter.com" target="_blank"><img src="assets/images/twitter.png"
                                 alt="Twitter logo" /></a>
-                        <a href="https://www.pinterest.com" target="_blank"><img src="images/pinterest.png"
+                        <a href="https://www.pinterest.com" target="_blank"><img src="assets/images/pinterest.png"
                                 alt="Pinterest logo" /></a>
                     </div>
                 </article>
 
                 <article class="person-display">
-                    <img src="images/mickhel.jpg" alt="Picture of Mickhel" />
+                    <img src="assets/images/mickhel.jpg" alt="Picture of Mickhel" />
 
                     <h4>MICKHEL</h4>
                     <p>Game Designer</p>
 
                     <div class="social-medias person-social">
-                        <a href="https://www.facebook.com" target="_blank"><img src="images/facebook.png"
+                        <a href="https://www.facebook.com" target="_blank"><img src="assets/images/facebook.png"
                                 alt="Facebook logo" /></a>
-                        <a href="https://www.twitter.com" target="_blank"><img src="images/twitter.png"
+                        <a href="https://www.twitter.com" target="_blank"><img src="assets/images/twitter.png"
                                 alt="Twitter logo" /></a>
-                        <a href="https://www.pinterest.com" target="_blank"><img src="images/pinterest.png"
+                        <a href="https://www.pinterest.com" target="_blank"><img src="assets/images/pinterest.png"
                                 alt="Pinterest logo" /></a>
                     </div>
                 </article>
 
                 <article class="person-display">
-                    <img src="images/arnold.jpg" alt="Picture of Arnold" />
+                    <img src="assets/images/arnold.jpg" alt="Picture of Arnold" />
 
                     <h4>ARNOLD</h4>
                     <p>Game Developer</p>
 
                     <div class="social-medias person-social">
-                        <a href="https://www.facebook.com" target="_blank"><img src="images/facebook.png"
+                        <a href="https://www.facebook.com" target="_blank"><img src="assets/images/facebook.png"
                                 alt="Facebook logo" /></a>
-                        <a href="https://www.twitter.com" target="_blank"><img src="images/twitter.png"
+                        <a href="https://www.twitter.com" target="_blank"><img src="assets/images/twitter.png"
                                 alt="Twitter logo" /></a>
-                        <a href="https://www.pinterest.com" target="_blank"><img src="images/pinterest.png"
+                        <a href="https://www.pinterest.com" target="_blank"><img src="assets/images/pinterest.png"
                                 alt="Pinterest logo" /></a>
                     </div>
                 </article>
