@@ -1,21 +1,23 @@
 <?PHP
-require ('assets/includes/database.inc.php');
+require('includes/database.inc.php');
 
-$error = 0;
+$database = connectDatabase();
 
-if( filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) || isset($_POST['password'])){
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $emailpost = $_POST['email'];
+    $passwordpost = $_POST['password'];
 
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $sql = "SELECT id FROM `Utilisateur` WHERE Email = '$emailpost' AND Password = '$passwordpost'";
+    $request = $database->query($sql);
+    $results = $request->fetch();
 
-
-    $sth = $dbh->prepare('SELECT * FROM Utilisateur WHERE Email = :email AND Mdp = :password');
-    $sth->execute(['Email'=> $email, 'Mdp'=> $password]);
-    $donnees = $sth->fetch();
-    if( $donnees == '' )
-        $error = 1;
-    else
-        header('Location: ./site.php');
+    if ($results != '') {
+        $_SESSION['email'] = $emailpost;
+        $_SESSION['password'] = $passwordpost;
+        header('Location: index.php');
+    } else {
+        echo "Email ou mot de passe incorrect";
+    }
 }
 ?>
 
@@ -83,12 +85,12 @@ if( filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) || isset($_POST['password
         </section>
 
         <section id="login-form">
-            <form action="signup.php" method="POST">
+            <form action="" method="POST">
                 <input type="email" name="email" id="email" placeholder="Email" required />
                 <input type="password" name="password" id="password" placeholder="Mot de passe" required />
-                <!-- <button type="submit" name="signup-submit">Connexion</button> -->
+                <input type="submit" name="signup-submit" value="Connexion" />
             </form>
-            <a href="memory.php"><button>Connexion</button></a>
+            <!-- <a href="memory.php"><button>Connexion</button></a> -->
         </section>
     </main>
 
