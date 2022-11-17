@@ -968,3 +968,8 @@ footer p, footer li {
 .buttonChat{
     margin-left: 5%;
 }
+
+#salami{
+    background-color: red;
+    color: blue;
+}

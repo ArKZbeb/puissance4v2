@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>" />
     <title>The Power Of Memory</title>
 </head>
 
 <body>
     <?php
-        include 'view/header.inc.php'
-            ?>
+    include 'view/header.inc.php'
+        ?>
 
     <a href="#signup-banner"><button id="fixed-button">⏏</button></a>
 
@@ -87,8 +87,8 @@
     </main>
 
     <?php
-        include 'view/footer.inc.php'
-            ?>
+    include 'view/footer.inc.php'
+        ?>
 </body>
 
 </html>
