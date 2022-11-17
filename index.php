@@ -1,3 +1,13 @@
+<?php
+require('includes/database.inc.php');
+
+$database = connectDatabase();
+
+$sql = "INSERT IGNORE INTO `Utilisateur`(`Identi`, `Email`, `Mdp`, `Pseudo`, `DateHeureInscri`, `DateHconnexion`) VALUES (NULL ,'test@gmail.com','12345','BeauGosseDu69','2022-11-09', NULL)";
+// Le IGNORE est important, car il empêche l'ajout de doublons
+$database->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,18 +16,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
+    <!-- Le style des classes/id créés par PHP ne marche pas sans ?v=<?php echo time(); ?> -->
     <title>The Power Of Memory</title>
 </head>
 
 <body>
     <?php
-    include 'view/header.inc.php'
-        ?>
+    include 'view/header.inc.php';
+
+    $sql = "SELECT Pseudo FROM `Utilisateur`";
+    $request = $database->query($sql);
+
+    if ($request->rowCount() > 0) {
+        // output data of each row
+        echo '<p id="salami">';
+        while ($row = $request->fetch()) {
+
+            echo "Pseudo : " . $row["Pseudo"];
+
+        }
+        echo '</p>';
+    } else {
+        echo "0 results";
+    }
+    ?>
 
     <a href="#homepage-banner"><button id="fixed-button">⏏</button></a>
 
     <main>
+
+
         <section class="banner" id="homepage-banner">
             <h2>BIENVENUE DANS NOTRE STUDIO !</h2>
             <p>Venez challenger les cerveaux les plus agiles !</p>

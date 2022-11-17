@@ -1,3 +1,24 @@
+<?php
+require('includes/database.inc.php');
+
+$database = connectDatabase();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $emailpost = $_POST['email'];
+
+    $sql = "SELECT Email FROM `utilisateur` WHERE Email = .".$emailpost;
+    $request = $database->query($sql);
+
+    if ($request->rowCount() > 0) {
+        "mail valide."
+    } else {
+        $sql = "INSERT INTO `Utilisateur`(`Identi`, `Email`, `Mdp`, `Pseudo`, `DateHeureInscri`, `DateHconnexion`) VALUES (NULL , $emailpost,'12345','BeauGosseDu69','2022-11-09', NULL)";
+
+    }
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +27,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>" />
     <title>The Power Of Memory</title>
 </head>
 
