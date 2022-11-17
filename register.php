@@ -6,7 +6,7 @@ $database = connectDatabase();
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $emailpost = $_POST['email'];
 
-    $sql = "SELECT Email FROM `utilisateur` WHERE Email = .".$emailpost;
+    $sql = "SELECT Email FROM `utilisateur` WHERE Email = .'".$emailpost."'";
     $request = $database->query($sql);
 
     if ($request->rowCount() > 0) {
