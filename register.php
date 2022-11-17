@@ -2,46 +2,6 @@
 require('includes/database.inc.php');
 
 $database = connectDatabase();
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $emailPost = $_POST['email'];
-    $passwordPost = $_POST['password'];
-    $usernamePost = $_POST['username'];
-    $passwordRepeatPost = $_POST['password-repeat'];
-
-    $sql = "SELECT Identi FROM `Utilisateur` WHERE Email = :email";
-    $request = $database->prepare($sql);
-    $request->bindParam("email", $emailPost);
-    $request->execute();
-
-    $sql = "SELECT Identi FROM `Utilisateur` WHERE Pseudo = :username";
-    $request2 = $database->prepare($sql);
-    $request2->bindParam("username", $usernamePost);
-    $request2->execute();
-
-    if ($request->rowCount() > 0) {
-        echo "Cet Email est déjà utilisé";
-    } else if ($request2->rowCount() > 0) {
-        echo "Ce Pseudo est déjà utilisé";
-    } else {
-        if ($passwordPost == $passwordRepeatPost) {
-            $sql = "INSERT INTO `Utilisateur` (`Identi`, `Email`, `Mdp`, `Pseudo`, `DateHeureInscri`, `DateHconnexion`)
-                    VALUES (NULL , :email, :pass, :user, NOW(), NULL)";
-            $request = $database->prepare($sql);
-            $request->bindParam("email", $emailPost);
-            $request->bindParam("pass", $passwordPost);
-            $request->bindParam("user", $usernamePost);
-            $request->execute();
-
-            $_SESSION['email'] = $emailPost;
-            $_SESSION['password'] = $passwordPost;
-            header('Location: memory.php');
-        } else {
-            echo "Les mots de passe ne correspondent pas";
-        }
-    }
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +37,59 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     placeholder="Confirmez le mot de passe" required />
                 <input type="submit" name="register-submit" value="Inscription" />
             </form>
+
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $emailPost = $_POST['email'];
+                $usernamePost = $_POST['username'];
+                $passwordPost = $_POST['password'];
+                $passwordRepeatPost = $_POST['password-repeat'];
+
+                $sql = "SELECT Identi FROM `Utilisateur` WHERE Email = :email";
+                $request1 = $database->prepare($sql);
+                $request1->bindParam("email", $emailPost);
+                $request1->execute();
+
+                $sql = "SELECT Identi FROM `Utilisateur` WHERE Pseudo = :user";
+                $request2 = $database->prepare($sql);
+                $request2->bindParam("user", $usernamePost);
+                $request2->execute();
+
+                if ($request1->rowCount() > 0) {
+                    echo '<p class="error">';
+                    echo "Cet Email est déjà utilisé";
+                    echo '</p>';
+                } else if ($request2->rowCount() > 0) {
+                    echo "Ce Pseudo est déjà utilisé";
+                } else {
+                    if (!preg_match('/[a-zA-Z]/', $passwordPost) || !preg_match('/\d/', $passwordPost) || !preg_match('/[^a-zA-Z\d]/', $passwordPost)) {
+                        echo "Le mot de passer doit contenir au moins une minuscule, une majuscule, un chiffre et un caractère spécial";
+
+                    } else if (strlen($passwordPost) < 8) {
+                        echo "Le mot de passer doit contenir au moins 8 caractères";
+
+                    } else {
+                        if ($passwordPost != $passwordRepeatPost) {
+                            echo "Les mots de passe ne correspondent pas";
+
+                        } else {
+
+                            $sql = "INSERT INTO `Utilisateur` (`Identi`, `Email`, `Mdp`, `Pseudo`, `DateHeureInscri`, `DateHconnexion`)
+                                    VALUES (NULL , :email, :pass, :user, NOW(), NULL)";
+                            $request = $database->prepare($sql);
+                            $request->bindParam("email", $emailPost);
+                            $request->bindParam("pass", $passwordPost);
+                            $request->bindParam("user", $usernamePost);
+                            $request->execute();
+
+                            $_SESSION['email'] = $emailPost;
+                            $_SESSION['password'] = $passwordPost;
+                            header('Location: login.php');
+                        }
+                    }
+                }
+            }
+            ?>
 
             <!-- <a href="login.php"><button>Inscription</button></a> -->
         </section>

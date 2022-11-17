@@ -973,3 +973,9 @@ footer p, footer li {
     background-color: red;
     color: blue;
 }
+
+.error {
+    color: red;
+    font-size: 1.2em;
+    text-align: center;
+}
