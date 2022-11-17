@@ -5,11 +5,11 @@ function connectDatabase()
     $password = "root";
 
     try {
-        $database = new PDO("mysql:host=localhost;dbname=shfhsdfs", $username, $password);
+        $database = new PDO("mysql:host=localhost;dbname=PowerOfMemory", $username, $password);
 
         return $database;
     } catch (PDOException $error) {
-        die("Connection failed: " . $error->getMessage());
+        die("Connection failed: " . $error->getMessage()); // Affiche le message d'erreur
     }
 }
 ?>
