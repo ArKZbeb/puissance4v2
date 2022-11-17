@@ -88,7 +88,8 @@ if( filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) || isset($_POST['password
                 <input type="password" name="password" id="password" placeholder="Mot de passe" required />
                 <!-- <button type="submit" name="signup-submit">Connexion</button> -->
             </form>
-            <a href="memory.php"><button>Connexion</button></a>
+            <input href="memory.html"><button>Connexion</button></a>
+            <input type="submit" name="signup-submit" value="Inscription">
         </section>
     </main>
 
