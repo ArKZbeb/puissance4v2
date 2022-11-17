@@ -5,8 +5,7 @@ function connectDatabase()
     $password = "root";
 
     try {
-        $database = new PDO("mysql:host=localhost;dbname=PowerOfMemory", $username, $password);
-        $database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $database = new PDO("mysql:host=localhost;dbname=shfhsdfs", $username, $password);
 
         return $database;
     } catch (PDOException $error) {
