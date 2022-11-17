@@ -62,7 +62,7 @@ $database = connectDatabase();
                 } else if ($request2->rowCount() > 0) {
                     echo "Ce Pseudo est déjà utilisé";
                 } else {
-                    if (!preg_match('/[a-zA-Z]/', $passwordPost) || !preg_match('/\d/', $passwordPost) || !preg_match('/[^a-zA-Z\d]/', $passwordPost)) {
+                    if (!preg_match('/[a-z]/', $passwordPost) || !preg_match('/[A-Z]/', $passwordPost) || !preg_match('/\d/', $passwordPost) || !preg_match('/[^a-zA-Z\d]/', $passwordPost)) {
                         echo "Le mot de passer doit contenir au moins une minuscule, une majuscule, un chiffre et un caractère spécial";
 
                     } else if (strlen($passwordPost) < 8) {
