@@ -1,3 +1,24 @@
+<?PHP
+require ('assets/includes/database.inc.php');
+
+$error = 0;
+
+if( filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) || isset($_POST['password'])){
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+
+    $sth = $dbh->prepare('SELECT * FROM Utilisateur WHERE Email = :email AND Mdp = :password');
+    $sth->execute(['Email'=> $email, 'Mdp'=> $password]);
+    $donnees = $sth->fetch();
+    if( $donnees == '' )
+        $error = 1;
+    else
+        header('Location: ./site.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
