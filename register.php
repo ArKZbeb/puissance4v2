@@ -1,3 +1,13 @@
+<?php 
+require ('assets/includes/database.inc.php');
+
+if(isset($_POST['username']) || isset($_POST['email'])){
+
+    $sth = $dbh->prepare("INSERT INTO Utilisateur(Identi,Email,Mdp,Pseudo,DateHeureInscri,DateHconnexion)
+    VALUES (?, ?, ?, NOW(), NULL");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +41,7 @@
                     placeholder="Confirmez le mot de passe" required />
                 <!-- <button type="submit" name="signup-submit">Inscription</button> -->
             </form>
-            <a href="login.php"><button>Inscription</button></a>
+            <input type="submit" name="signup-submit" value="Inscription">
         </section>
     </main>
 
