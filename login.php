@@ -1,22 +1,34 @@
 <?PHP
+session_start();
+
 require('includes/database.inc.php');
 
 $database = connectDatabase();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $emailpost = $_POST['email'];
-    $passwordpost = $_POST['password'];
 
-    $sql = "SELECT id FROM `Utilisateur` WHERE Email = '$emailpost' AND Password = '$passwordpost'";
-    $request = $database->query($sql);
-    $results = $request->fetch();
+    if (isset($_POST['login-submit'])) {
+        $emailpost = $_POST['login-email'];
+        $passwordpost = $_POST['login-password'];
 
-    if ($results != '') {
-        $_SESSION['email'] = $emailpost;
-        $_SESSION['password'] = $passwordpost;
-        header('Location: index.php');
-    } else {
-        echo "Email ou mot de passe incorrect";
+        $sql = "SELECT * FROM `Utilisateur` WHERE Email = :mail AND Mdp = :mdp";
+        $request = $database->prepare($sql);
+        $request->bindParam(':mail', $emailpost);
+        $request->bindParam(':mdp', $passwordpost);
+        $request->execute();
+
+        if ($request->rowCount() < 1) {
+            echo "Email ou mot de passe incorrect";
+
+        } else {
+            $_SESSION['email'] = $emailpost;
+            $_SESSION['password'] = $passwordpost;
+            $_SESSION['id'] = $request->fetch()['Identi'];
+            $_SESSION['username'] = $request->fetch()['Pseudo'];
+            $_SESSION['loggedin'] = true;
+            header('Location: index.php');
+            exit();
+        }
     }
 }
 ?>
@@ -85,10 +97,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </section>
 
         <section id="login-form">
-            <form action="" method="POST">
-                <input type="email" name="email" id="email" placeholder="Email" required />
-                <input type="password" name="password" id="password" placeholder="Mot de passe" required />
-                <input type="submit" name="signup-submit" value="Connexion" />
+            <form action="login.php" method="POST">
+                <input type="email" name="login-email" id="email" placeholder="Email" required />
+                <input type="password" name="login-password" id="password" placeholder="Mot de passe" required />
+                <input type="submit" name="login-submit" value="Connexion" />
             </form>
             <!-- <a href="memory.php"><button>Connexion</button></a> -->
         </section>
