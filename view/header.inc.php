@@ -3,7 +3,10 @@ session_start();
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
     $result = "<li><a href='myaccount.php'>";
-    $result .= "Mon profile";
+    $result .= "<img class='profile-pic' src='assets/images/player.jpg' alt='User icon' />";
+    $result .= "</a></li>";
+    $result .= "<li><a href='index.php?logout'>";
+    $result .= "Se déconnecter";
     $result .= "</a></li>";
 } else {
     $result = "<li><a href='login.php'>";
@@ -12,6 +15,15 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
     $result .= "<li><a href='register.php'>";
     $result .= "S'inscrire";
     $result .= "</a></li>";
+}
+
+if (isset($_GET['logout'])) {
+    $_SESSION['email'] = $emailpost;
+    unset($_SESSION['password']);
+    unset($_SESSION['id']);
+    unset($_SESSION['username']);
+    unset($_SESSION['loggedin']);
+    session_destroy();
 }
 ?>
 
