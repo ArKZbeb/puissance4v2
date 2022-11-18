@@ -1,3 +1,9 @@
+<?php
+require('includes/database.inc.php');
+
+$database = connectDatabase();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,7 +74,7 @@
             <form action="">
                 <input type="email" placeholder="Nouveau mail" required />
                 <input type="password" placeholder="Mot de passe" required />
-                <button type="submit">Changer de mail</button>
+                <button type="submit" name="fromage">Changer de mail</button>
             </form>
 
             <h4>Changer de mot de passe</h4>
