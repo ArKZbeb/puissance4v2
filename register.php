@@ -1,11 +1,7 @@
-<?php 
-require ('assets/includes/database.inc.php');
+<?PHP
+require('includes/database.inc.php');
 
-if(isset($_POST['username']) || isset($_POST['email'])){
-
-    $sth = $dbh->prepare("INSERT INTO Utilisateur(Identi,Email,Mdp,Pseudo,DateHeureInscri,DateHconnexion)
-    VALUES (?, ?, ?, NOW(), NULL");
-}
+$database = connectDatabase();
 ?>
 
 <!DOCTYPE html>
@@ -33,15 +29,66 @@ if(isset($_POST['username']) || isset($_POST['email'])){
         </section>
 
         <section id="signup-form">
-            <form action="signup.php" method="POST">
+            <form action="register.php" method="POST">
                 <input type="email" name="email" id="email" placeholder="Email" required />
                 <input type="text" name="username" id="username" placeholder="Pseudo" required />
                 <input type="password" name="password" id="password" placeholder="Mot de passe" required />
                 <input type="password" name="password-repeat" id="password-repeat"
                     placeholder="Confirmez le mot de passe" required />
-                <!-- <button type="submit" name="signup-submit">Inscription</button> -->
+                <input type="submit" name="register-submit" value="Inscription" />
             </form>
-            <input type="submit" name="signup-submit" value="Inscription">
+
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $emailPost = $_POST['email'];
+                $usernamePost = $_POST['username'];
+                $passwordPost = $_POST['password'];
+                $passwordRepeatPost = $_POST['password-repeat'];
+
+                $sql = "SELECT Identi FROM `Utilisateur` WHERE Email = :email";
+                $request1 = $database->prepare($sql);
+                $request1->bindParam("email", $emailPost);
+                $request1->execute();
+
+                $sql = "SELECT Identi FROM `Utilisateur` WHERE Pseudo = :user";
+                $request2 = $database->prepare($sql);
+                $request2->bindParam("user", $usernamePost);
+                $request2->execute();
+
+                if ($request1->rowCount() > 0) {
+                    echo '<p class="error">';
+                    echo "Cet Email est déjà utilisé";
+                    echo '</p>';
+                } else if ($request2->rowCount() > 0) {
+                    echo "Ce Pseudo est déjà utilisé";
+                } else {
+                    if (!preg_match('/[a-z]/', $passwordPost) || !preg_match('/[A-Z]/', $passwordPost) || !preg_match('/\d/', $passwordPost) || !preg_match('/[^a-zA-Z\d]/', $passwordPost)) {
+                        echo "Le mot de passer doit contenir au moins une minuscule, une majuscule, un chiffre et un caractère spécial";
+
+                    } else if (strlen($passwordPost) < 8) {
+                        echo "Le mot de passer doit contenir au moins 8 caractères";
+
+                    } else {
+                        if ($passwordPost != $passwordRepeatPost) {
+                            echo "Les mots de passe ne correspondent pas";
+
+                        } else {
+
+                            $sql = "INSERT INTO `Utilisateur` (`Identi`, `Email`, `Mdp`, `Pseudo`, `DateHeureInscri`, `DateHconnexion`)
+                                    VALUES (NULL , :email, :pass, :user, NOW(), NULL)";
+                            $request = $database->prepare($sql);
+                            $request->bindParam("email", $emailPost);
+                            $request->bindParam("pass", $passwordPost);
+                            $request->bindParam("user", $usernamePost);
+                            $request->execute();
+                            header('Location: login.php');
+                        }
+                    }
+                }
+            }
+            ?>
+
+            <!-- <a href="login.php"><button>Inscription</button></a> -->
         </section>
     </main>
 

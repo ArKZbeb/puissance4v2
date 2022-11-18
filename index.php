@@ -2,10 +2,6 @@
 require('includes/database.inc.php');
 
 $database = connectDatabase();
-
-$sql = "INSERT IGNORE INTO `Utilisateur`(`Identi`, `Email`, `Mdp`, `Pseudo`, `DateHeureInscri`, `DateHconnexion`) VALUES (NULL ,'test@gmail.com','12345','BeauGosseDu69','2022-11-09', NULL)";
-// Le IGNORE est important, car il empêche l'ajout de doublons
-$database->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -24,22 +20,6 @@ $database->query($sql);
 <body>
     <?php
     include 'view/header.inc.php';
-
-    $sql = "SELECT Pseudo FROM `Utilisateur`";
-    $request = $database->query($sql);
-
-    if ($request->rowCount() > 0) {
-        // output data of each row
-        echo '<p id="salami">';
-        while ($row = $request->fetch()) {
-
-            echo "Pseudo : " . $row["Pseudo"];
-
-        }
-        echo '</p>';
-    } else {
-        echo "0 results";
-    }
     ?>
 
     <a href="#homepage-banner"><button id="fixed-button">⏏</button></a>

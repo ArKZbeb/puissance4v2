@@ -1,21 +1,35 @@
 <?PHP
-require ('assets/includes/database.inc.php');
+session_start();
 
-$error = 0;
+require('includes/database.inc.php');
 
-if( filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) || isset($_POST['password'])){
+$database = connectDatabase();
 
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+    if (isset($_POST['login-submit'])) {
+        $emailpost = $_POST['login-email'];
+        $passwordpost = $_POST['login-password'];
 
-    $sth = $dbh->prepare('SELECT * FROM Utilisateur WHERE Email = :email AND Mdp = :password');
-    $sth->execute(['Email'=> $email, 'Mdp'=> $password]);
-    $donnees = $sth->fetch();
-    if( $donnees == '' )
-        $error = 1;
-    else
-        header('Location: ./site.php');
+        $sql = "SELECT * FROM `Utilisateur` WHERE Email = :mail AND Mdp = :mdp";
+        $request = $database->prepare($sql);
+        $request->bindParam(':mail', $emailpost);
+        $request->bindParam(':mdp', $passwordpost);
+        $request->execute();
+
+        if ($request->rowCount() < 1) {
+            echo "Email ou mot de passe incorrect";
+
+        } else {
+            $_SESSION['email'] = $emailpost;
+            $_SESSION['password'] = $passwordpost;
+            $_SESSION['id'] = $request->fetch()['Identi'];
+            $_SESSION['username'] = $request->fetch()['Pseudo'];
+            $_SESSION['loggedin'] = true;
+            header('Location: index.php');
+            exit();
+        }
+    }
 }
 ?>
 
@@ -83,13 +97,12 @@ if( filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) || isset($_POST['password
         </section>
 
         <section id="login-form">
-            <form action="signup.php" method="POST">
-                <input type="email" name="email" id="email" placeholder="Email" required />
-                <input type="password" name="password" id="password" placeholder="Mot de passe" required />
-                <!-- <button type="submit" name="signup-submit">Connexion</button> -->
+            <form action="login.php" method="POST">
+                <input type="email" name="login-email" id="email" placeholder="Email" required />
+                <input type="password" name="login-password" id="password" placeholder="Mot de passe" required />
+                <input type="submit" name="login-submit" value="Connexion" />
             </form>
-            <input href="memory.html"><button>Connexion</button></a>
-            <input type="submit" name="signup-submit" value="Inscription">
+            <!-- <a href="memory.php"><button>Connexion</button></a> -->
         </section>
     </main>
 

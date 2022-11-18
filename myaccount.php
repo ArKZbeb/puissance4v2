@@ -26,7 +26,9 @@
             <div id="my-profile-pic">
                 <img src="assets/images/player.jpg" alt="Your profile picture" />
             </div>
-            <h3>Pseudo</h3>
+            <h3>
+                <?php echo $_SESSION['username'] ?>
+            </h3>
             <h4>Ma bio :</h4>
             <textarea id="my-bio" maxlength="64" placeholder="Décrivez-vous en quelques mots..."></textarea>
         </section>
