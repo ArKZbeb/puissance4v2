@@ -2,6 +2,8 @@
 require('includes/database.inc.php');
 
 $database = connectDatabase();
+
+
 ?>
 
 <!DOCTYPE html>
