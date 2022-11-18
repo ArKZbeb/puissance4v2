@@ -81,9 +81,6 @@ $database = connectDatabase();
                             $request->bindParam("pass", $passwordPost);
                             $request->bindParam("user", $usernamePost);
                             $request->execute();
-
-                            $_SESSION['email'] = $emailPost;
-                            $_SESSION['password'] = $passwordPost;
                             header('Location: login.php');
                         }
                     }
