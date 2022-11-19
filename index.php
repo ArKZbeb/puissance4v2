@@ -18,8 +18,6 @@ $request = $database->query($sql);
 $nbrOnline = $request->rowCount();
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 
