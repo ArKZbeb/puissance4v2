@@ -42,8 +42,6 @@ $nbrOnline = $request->rowCount();
     <a href="#homepage-banner"><button id="fixed-button">⏏</button></a>
 
     <main>
-
-
         <section class="banner" id="homepage-banner">
             <h2>BIENVENUE DANS NOTRE STUDIO !</h2>
             <p>Venez challenger les cerveaux les plus agiles !</p>
