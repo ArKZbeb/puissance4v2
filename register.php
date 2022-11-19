@@ -1,7 +1,43 @@
 <?PHP
 require('includes/database.inc.php');
+require('includes/email.inc.php');
+require('includes/username.inc.php');
+require('includes/password.inc.php');
 
-$database = connectDatabase();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    /* ---------------------------- Create an account --------------------------- */
+    if (isset($_POST['register-submit'])) {
+
+        $email = $_POST['email'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $passwordRepeat = $_POST['password-repeat'];
+
+        $accountError = verifyEmail($email);
+
+        if ($accountError == null) {
+            $accountError = verifyUsername($username);
+
+            if ($accountError == null) {
+                $accountError = verifyPassword($password, $passwordRepeat);
+
+                if ($accountError == null) {
+                    $sql = "INSERT INTO `Utilisateur` (`Identi`, `Email`, `Mdp`, `Pseudo`, `DateHeureInscri`, `DateHconnexion`)
+                    VALUES (NULL , :email, :pass, :user, NOW(), NULL)";
+                    $request = $database->prepare($sql);
+                    $request->bindParam("email", $email);
+                    $request->bindParam("pass", $password);
+                    $request->bindParam("user", $username);
+                    $request->execute();
+
+                    $_SESSION['accountCreated'] = true;
+                    header('Location: login.php');
+                }
+            }
+        }
+
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,58 +73,16 @@ $database = connectDatabase();
                     placeholder="Confirmez le mot de passe" required />
                 <input type="submit" name="register-submit" value="Inscription" />
             </form>
-
             <?php
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $emailPost = $_POST['email'];
-                $usernamePost = $_POST['username'];
-                $passwordPost = $_POST['password'];
-                $passwordRepeatPost = $_POST['password-repeat'];
-
-                $sql = "SELECT Identi FROM `Utilisateur` WHERE Email = :email";
-                $request1 = $database->prepare($sql);
-                $request1->bindParam("email", $emailPost);
-                $request1->execute();
-
-                $sql = "SELECT Identi FROM `Utilisateur` WHERE Pseudo = :user";
-                $request2 = $database->prepare($sql);
-                $request2->bindParam("user", $usernamePost);
-                $request2->execute();
-
-                if ($request1->rowCount() > 0) {
-                    echo '<p class="error">';
-                    echo "Cet Email est déjà utilisé";
-                    echo '</p>';
-                } else if ($request2->rowCount() > 0) {
-                    echo "Ce Pseudo est déjà utilisé";
-                } else {
-                    if (!preg_match('/[a-z]/', $passwordPost) || !preg_match('/[A-Z]/', $passwordPost) || !preg_match('/\d/', $passwordPost) || !preg_match('/[^a-zA-Z\d]/', $passwordPost)) {
-                        echo "Le mot de passer doit contenir au moins une minuscule, une majuscule, un chiffre et un caractère spécial";
-
-                    } else if (strlen($passwordPost) < 8) {
-                        echo "Le mot de passer doit contenir au moins 8 caractères";
-
-                    } else {
-                        if ($passwordPost != $passwordRepeatPost) {
-                            echo "Les mots de passe ne correspondent pas";
-
-                        } else {
-
-                            $sql = "INSERT INTO `Utilisateur` (`Identi`, `Email`, `Mdp`, `Pseudo`, `DateHeureInscri`, `DateHconnexion`)
-                                    VALUES (NULL , :email, :pass, :user, NOW(), NULL)";
-                            $request = $database->prepare($sql);
-                            $request->bindParam("email", $emailPost);
-                            $request->bindParam("pass", $passwordPost);
-                            $request->bindParam("user", $usernamePost);
-                            $request->execute();
-                            header('Location: login.php');
-                        }
-                    }
-                }
+            if ($accountError != null) {
+                echo '<p class="form-msg form-error">';
+                echo $accountError;
+                echo '</p>';
             }
             ?>
-
             <!-- <a href="login.php"><button>Inscription</button></a> -->
+
+            <p> Déjà un compte ? <a href="login.php">Connectez-vous.</a></p>
         </section>
     </main>
 

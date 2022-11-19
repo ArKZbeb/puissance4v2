@@ -1,10 +1,24 @@
 <?php
 require('includes/database.inc.php');
 
-$database = connectDatabase();
+$sql = "SELECT * FROM `utilisateur`";
+$request = $database->query($sql);
+$NombreUtilisateur = $request->rowCount();
 
+$sql = "SELECT * FROM `Score`";
+$request = $database->query($sql);
+$nbrPartie = $request->rowCount();
 
+$sql = "SELECT MAX(ScorePartie) FROM `Score`";
+$request = $database->query($sql);
+$highScore = $request->fetch()['MAX(ScorePartie)'];
+
+$sql = "SELECT * FROM `Utilisateur` WHERE DateHConnexion > DATE_SUB(NOW(), INTERVAL 5 MINUTE)";
+$request = $database->query($sql);
+$nbrOnline = $request->rowCount();
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +35,7 @@ $database = connectDatabase();
 
 <body>
     <?php
+    $includePage = "homepage";
     include 'view/header.inc.php';
     ?>
 
@@ -95,24 +110,31 @@ $database = connectDatabase();
             <div class="stats-container">
                 <div class="stats-row">
                     <article id="stat1" class="stat-display">
-                        <h3>310</h3>
+                        <h3>
+                            <?php echo $nbrPartie ?>
+                        </h3>
                         <h4>Parties Jouées</h4>
                     </article>
 
                     <article id="stat2" class="stat-display">
-                        <h3>1020</h3>
+                        <h3>
+                            <?php echo $nbrOnline ?>
+                        </h3>
                         <h4>Joueurs connectés</h4>
                     </article>
                 </div>
 
                 <div class="stats-row">
                     <article id="stat3" class="stat-display">
-                        <h3>10 sec</h3>
+                        <h3>
+                            <?php echo $highScore ?> sec
+                        </h3>
                         <h4>Temps Record</h4>
                     </article>
 
                     <article id="stat4" class="stat-display">
-                        <h3>21 300</h3>
+                        <h3>
+                            <?php echo $NombreUtilisateur //variable ?></h3>
                         <h4>Joueurs Inscrits</h4>
                     </article>
                 </div>
