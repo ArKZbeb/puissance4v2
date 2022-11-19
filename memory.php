@@ -1,3 +1,12 @@
+<?PHP
+require('includes/session.inc.php');
+
+/* ------------------ Redirect to homepage if not connected ----------------- */
+if (!isConnected()) {
+    header('Location: index.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

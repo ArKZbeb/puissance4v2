@@ -2,6 +2,12 @@
 require('includes/database.inc.php');
 require('includes/email.inc.php');
 require('includes/password.inc.php');
+require('includes/session.inc.php');
+
+/* ------------------ Redirect to homepage if not connected ----------------- */
+if (!isConnected()) {
+    header('Location: index.php');
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     /* ------------------------------ Update email ------------------------------ */
@@ -56,6 +62,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     /* ---------------------------- Delete account ---------------------------- */
+    if (isset($_POST['delete-account-submit'])) {
+        $password = $_POST['delete-account-password'];
+
+        if (!isPasswordCorrect($password)) {
+            $deleteAccountError = "Le mot de passe est incorrect";
+        } else {
+            $sql = "DELETE FROM `Utilisateur` WHERE Identi = :id";
+            $request = $database->prepare($sql);
+            $request->bindParam("id", $_SESSION['id']);
+            $request->execute();
+
+            session_destroy();
+            header('Location: ?lougout');
+        }
+    }
 }
 ?>
 
@@ -165,8 +186,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <h4>Zone dangereuse</h4>
             <form action="myaccount.php" method="POST">
-                <input type="password" name="password" placeholder="Mot de passe" required />
-                <button type="submit">Supprimer mon compte</button>
+                <input type="password" name="delete-account-password" placeholder="Mot de passe" required />
+                <input id="delete-account-button" type="submit" name="delete-account-submit"
+                    value="Supprimer le compte" />
             </form>
         </section>
     </main>
