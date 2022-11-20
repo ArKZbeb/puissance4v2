@@ -1,8 +1,8 @@
 <?php
 require('includes/database.inc.php');
+require('includes/session.inc.php');
 require('includes/email.inc.php');
 require('includes/password.inc.php');
-require('includes/session.inc.php');
 
 /* ------------------ Redirect to homepage if not connected ----------------- */
 if (!isConnected()) {
@@ -19,18 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($newEmailError == null) {
 
-            if (!isPasswordCorrect($password)) {
+            if (!isPasswordCorrect($password, $_SESSION['email'])) {
                 $newEmailError = "Le mot de passe est incorrect";
 
             } else {
-                $sql = "UPDATE `Utilisateur` SET Email = :email WHERE Identi = :id";
-                $request = $database->prepare($sql);
-                $request->bindParam("email", $newEmail);
-                $request->bindParam("id", $_SESSION['id']);
-                $request->execute();
+                updateEmail($newEmail, $_SESSION['id']);
 
                 $_SESSION['email'] = $newEmail;
-
                 $newEmailMsg = "L'adresse email de votre compte a été mise à jour avec succès";
             }
         }
@@ -42,21 +37,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $newPassword = $_POST['new-password'];
         $newPasswordRepeat = $_POST['new-password-repeat'];
 
-        if (!isPasswordCorrect($oldPassword)) {
+        if (!isPasswordCorrect($oldPassword, $_SESSION['email'])) {
             $newPasswordError = "Votre ancien mot de passe est incorrect";
         } else {
             $newPasswordError = verifyPassword($newPassword, $newPasswordRepeat);
 
             if ($newPasswordError == null) {
-                $sql = "UPDATE `utilisateur` SET Mdp = :newPass WHERE Identi = :id";
-                $request = $database->prepare($sql);
-                $request->bindParam("newPass", $newPassword);
-                $request->bindParam("id", $_SESSION['id']);
-                $request->execute();
+                if ($oldPassword == $newPassword) {
+                    $newPasswordError = "Votre nouveau mot de passe doit être différent de l'ancien";
 
-                $_SESSION['password'] = $newPassword;
+                } else {
+                    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                    updatePassword($hashedPassword, $_SESSION['id']);
 
-                $newPasswordMsg = "Votre mot de passe a été mis à jour avec succès";
+                    $_SESSION['password'] = $newPassword;
+                    unset($oldPassword);
+                    unset($newPassword);
+                    unset($newPasswordRepeat);
+                    $newPasswordMsg = "Votre mot de passe a été mis à jour avec succès";
+                }
             }
         }
     }
@@ -65,16 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['delete-account-submit'])) {
         $password = $_POST['delete-account-password'];
 
-        if (!isPasswordCorrect($password)) {
+        if (!isPasswordCorrect($password, $_SESSION['email'])) {
             $deleteAccountError = "Le mot de passe est incorrect";
-        } else {
-            $sql = "DELETE FROM `Utilisateur` WHERE Identi = :id";
-            $request = $database->prepare($sql);
-            $request->bindParam("id", $_SESSION['id']);
-            $request->execute();
 
-            session_destroy();
-            header('Location: ?lougout');
+        } else {
+            deleteAccount($_SESSION['id']);
+            logout();
         }
     }
 }
@@ -190,6 +185,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input id="delete-account-button" type="submit" name="delete-account-submit"
                     value="Supprimer le compte" />
             </form>
+            <?php
+            if ($deleteAccountError != null) {
+                echo '<p class="form-msg form-error">';
+                echo $deleteAccountError;
+                echo '</p>';
+            }
+            ?>
         </section>
     </main>
 

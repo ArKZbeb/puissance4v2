@@ -1,8 +1,13 @@
 <?php
 require('includes/database.inc.php');
+require('includes/session.inc.php');
 require('includes/email.inc.php');
 require('includes/username.inc.php');
 require('includes/password.inc.php');
+/* -------------------- Redirect to homepage if connected ------------------- */
+if (isConnected()) {
+    header('Location: index.php');
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     /* ---------------------------- Create an account --------------------------- */
@@ -14,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $passwordRepeat = $_POST['password-repeat'];
 
         $accountError = verifyEmail($email);
-
         if ($accountError == null) {
             $accountError = verifyUsername($username);
 
@@ -22,20 +26,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $accountError = verifyPassword($password, $passwordRepeat);
 
                 if ($accountError == null) {
-                    $sql = "INSERT INTO `Utilisateur` (`Identi`, `Email`, `Mdp`, `Pseudo`, `DateHeureInscri`, `DateHconnexion`)
-                    VALUES (NULL , :email, :pass, :user, NOW(), NULL)";
-                    $request = $database->prepare($sql);
-                    $request->bindParam("email", $email);
-                    $request->bindParam("pass", $password);
-                    $request->bindParam("user", $username);
-                    $request->execute();
+                    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                    createAccount($email, $username, $hashedPassword);
 
+                    unset($password);
+                    unset($passwordRepeat);
+                    unset($hashedPassword);
                     $_SESSION['accountCreated'] = true;
                     header('Location: login.php');
                 }
             }
         }
-
     }
 }
 ?>

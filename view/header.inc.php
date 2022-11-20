@@ -1,6 +1,6 @@
 <?php
+require_once('includes/database.inc.php');
 require_once('includes/session.inc.php');
-
 session_start();
 
 /* ---------------------------- Connected or not ---------------------------- */
@@ -15,11 +15,14 @@ if (isConnected()) {
     $gameLink = "memory.php";
     /* ------------------------ Update last activity time ----------------------- */
     if (isset($database)) {
-        $sql = "UPDATE `Utilisateur` SET DateHConnexion = NOW() WHERE Identi = :id";
-        $request = $database->prepare($sql);
-        $request->bindParam("id", $_SESSION['id']);
-        $request->execute();
+        updateConnectionDate($_SESSION['id']);
     }
+
+    /* --------------------------------- Log out -------------------------------- */
+    if (isset($_GET['logout'])) {
+        logout();
+    }
+
 } else {
     $result = "<li><a href='login.php'>";
     $result .= "Se connecter";
@@ -30,20 +33,10 @@ if (isConnected()) {
 
     $gameLink = "login.php";
 }
-
-/* -------------------------------- Log off --------------------------------- */
-if (isset($_GET['logout'])) {
-    $_SESSION['email'] = $emailpost;
-    unset($_SESSION['password']);
-    unset($_SESSION['id']);
-    unset($_SESSION['username']);
-    unset($_SESSION['loggedin']);
-    session_destroy();
-    header('Location: index.php');
-}
 ?>
 
-<header <?php if ($includePage=="homepage") echo "id='homepage-header'"; ?>>
+<header <?php if ($includePage=="homepage") echo "id='homepage-header'" ?>
+    >
     <h1>The Power Of Memory</h1>
     <nav>
         <ul>

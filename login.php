@@ -2,32 +2,25 @@
 session_start();
 
 require('includes/database.inc.php');
+require('includes/session.inc.php');
+require('includes/email.inc.php');
+require('includes/password.inc.php');
+/* -------------------- Redirect to homepage if connected ------------------- */
+if (isConnected()) {
+    header('Location: index.php');
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     /* ------------------------------- Connection ------------------------------- */
     if (isset($_POST['login-submit'])) {
-        $emailpost = $_POST['login-email'];
-        $passwordpost = $_POST['login-password'];
+        $email = $_POST['login-email'];
+        $password = $_POST['login-password'];
 
-        $sql = "SELECT * FROM `Utilisateur` WHERE Email = :mail AND Mdp = :mdp";
-        $request = $database->prepare($sql);
-        $request->bindParam(':mail', $emailpost);
-        $request->bindParam(':mdp', $passwordpost);
-        $request->execute();
-
-        if ($request->rowCount() < 1) {
+        if (!isEmailCorrect($email) || !isPasswordCorrect($password, $email)) {
             $connectionError = "Email ou mot de passe incorrect";
 
         } else {
-            $_SESSION['email'] = $emailpost;
-            $_SESSION['password'] = $passwordpost;
-            $_SESSION['id'] = $request->fetch()['Identi'];
-            $_SESSION['username'] = $request->fetch()['Pseudo'];
-            // $_SESSION['id'] = $request->fetch()[0]['Identi'];
-            // $_SESSION['username'] = $request->fetch()[0]['Pseudo'];
-            $_SESSION['loggedin'] = true;
-            header('Location: index.php');
-            exit();
+            login($email);
         }
     }
 }

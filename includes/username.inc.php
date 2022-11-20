@@ -3,7 +3,7 @@ function verifyUsername($username)
 {
     global $database; // Permet d'utiliser la variable $database définie dans le fichier database.inc.php
 
-    $sql = "SELECT * FROM `Utilisateur` WHERE Pseudo = :user";
+    $sql = "SELECT * FROM `user` WHERE username = :user";
     $request = $database->prepare($sql);
     $request->bindParam("user", $username);
     $request->execute();

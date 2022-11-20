@@ -1,21 +1,22 @@
 <?php
 require('includes/database.inc.php');
-
-$sql = "SELECT * FROM `utilisateur`";
-$request = $database->query($sql);
-$NombreUtilisateur = $request->rowCount();
-
-$sql = "SELECT * FROM `Score`";
+/* ------------------------------- Live stats ------------------------------- */
+$sql = "SELECT * FROM `score`";
 $request = $database->query($sql);
 $nbrPartie = $request->rowCount();
 
-$sql = "SELECT MIN(ScorePartie) FROM `Score`";
-$request = $database->query($sql);
-$highScore = $request->fetch()['MIN(ScorePartie)'];
-
-$sql = "SELECT * FROM `Utilisateur` WHERE DateHConnexion > DATE_SUB(NOW(), INTERVAL 5 MINUTE)";
+$sql = "SELECT * FROM `user` WHERE connection_date > DATE_SUB(NOW(), INTERVAL 5 MINUTE)";
 $request = $database->query($sql);
 $nbrOnline = $request->rowCount();
+
+$sql = "SELECT MIN(score) FROM `score`";
+$request = $database->query($sql);
+$result = $request->fetch();
+$highScore = round($result['MIN(score)'], 3);
+
+$sql = "SELECT * FROM `user`";
+$request = $database->query($sql);
+$NombreUtilisateur = $request->rowCount();
 ?>
 
 <!DOCTYPE html>

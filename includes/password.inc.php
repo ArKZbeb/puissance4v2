@@ -16,8 +16,16 @@ function verifyPassword($password, $passwordRepeat)
     }
 }
 
-function isPasswordCorrect($input)
+function isPasswordCorrect($password, $email)
 {
-    return $input == $_SESSION['password'];
+    global $database; // Permet d'utiliser la variable $database définie dans le fichier database.inc.php
+
+    $sql = "SELECT pass FROM `user` WHERE email = :email";
+    $request = $database->prepare($sql);
+    $request->bindParam("email", $email);
+    $request->execute();
+
+    $result = $request->fetch();
+    return password_verify($password, $result['pass']);
 }
 ?>
