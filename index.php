@@ -9,9 +9,9 @@ $sql = "SELECT * FROM `Score`";
 $request = $database->query($sql);
 $nbrPartie = $request->rowCount();
 
-$sql = "SELECT MAX(ScorePartie) FROM `Score`";
+$sql = "SELECT MIN(ScorePartie) FROM `Score`";
 $request = $database->query($sql);
-$highScore = $request->fetch()['MAX(ScorePartie)'];
+$highScore = $request->fetch()['MIN(ScorePartie)'];
 
 $sql = "SELECT * FROM `Utilisateur` WHERE DateHConnexion > DATE_SUB(NOW(), INTERVAL 5 MINUTE)";
 $request = $database->query($sql);

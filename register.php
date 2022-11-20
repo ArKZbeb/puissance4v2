@@ -1,4 +1,4 @@
-<?PHP
+<?php
 require('includes/database.inc.php');
 require('includes/email.inc.php');
 require('includes/username.inc.php');

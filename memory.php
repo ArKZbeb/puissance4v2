@@ -1,4 +1,4 @@
-<?PHP
+<?php
 require('includes/session.inc.php');
 
 /* ------------------ Redirect to homepage if not connected ----------------- */
@@ -21,8 +21,8 @@ if (!isConnected()) {
 
 <body>
     <?php
-    include 'view/header.inc.php'
-        ?>
+    include 'view/header.inc.php';
+    ?>
 
     <a href="#game-banner"><button id="fixed-button">⏏</button></a>
 
