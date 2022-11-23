@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:8889
--- Généré le : ven. 18 nov. 2022 à 09:54
--- Version du serveur :  5.7.34
--- Version de PHP : 7.4.21
+-- Host: localhost:3306
+-- Generation Time: Nov 20, 2022 at 11:19 PM
+-- Server version: 5.7.24
+-- PHP Version: 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,184 +18,142 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `database`
+-- Database: `database`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Jeux`
+-- Table structure for table `game`
 --
 
-CREATE TABLE `Jeux` (
-  `IdJeu` int(11) NOT NULL,
-  `NomJeu` varchar(20) NOT NULL
+CREATE TABLE `game` (
+  `id` int(11) NOT NULL,
+  `name` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `Jeux`
+-- Dumping data for table `game`
 --
 
-INSERT INTO `Jeux` (`IdJeu`, `NomJeu`) VALUES
-(1, 'MemoryGame');
+INSERT INTO `game` (`id`, `name`) VALUES
+(1, 'Power Of Memory');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Message`
+-- Table structure for table `message`
 --
 
-CREATE TABLE `Message` (
-  `IndentiMsg` int(11) NOT NULL,
-  `IdJeu` int(11) NOT NULL,
-  `IdExpe` int(11) NOT NULL,
-  `Msg` varchar(280) NOT NULL,
-  `DateHeureMsg` datetime NOT NULL
+CREATE TABLE `message` (
+  `id` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `game_id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `Message`
---
-
-INSERT INTO `Message` (`IndentiMsg`, `IdJeu`, `IdExpe`, `Msg`, `DateHeureMsg`) VALUES
-(1, 1, 1, 'Fromage', '2022-11-09 13:45:17'),
-(2, 1, 7, 'Je voudrais un bonhomme de neige', '2022-11-09 13:46:12'),
-(3, 1, 8, 'Cochon', '2022-11-01 14:54:17');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Score`
+-- Table structure for table `score`
 --
 
-CREATE TABLE `Score` (
-  `IdentiScore` int(11) NOT NULL,
-  `IdJoueur` int(11) NOT NULL,
-  `IdJeu` int(11) NOT NULL,
-  `DiffPartie` varchar(15) NOT NULL,
-  `ScorePartie` int(11) NOT NULL,
-  `DateHeurePartie` date NOT NULL
+CREATE TABLE `score` (
+  `id` int(11) NOT NULL,
+  `player_id` int(11) NOT NULL,
+  `game_id` int(11) NOT NULL,
+  `difficulty` varchar(8) NOT NULL,
+  `score` float NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `Score`
+-- Dumping data for table `score`
 --
 
-INSERT INTO `Score` (`IdentiScore`, `IdJoueur`, `IdJeu`, `DiffPartie`, `ScorePartie`, `DateHeurePartie`) VALUES
-(6, 1, 1, 'Facile', 4200, '2022-11-09'),
-(7, 9, 1, 'Facile', 2830, '2022-11-09'),
-(8, 7, 1, 'Normal', 6030, '2022-11-09'),
-(9, 8, 1, 'Normal', 7420, '2022-11-09'),
-(10, 10, 1, 'Facile', 5023, '2022-11-09');
+INSERT INTO `score` (`id`, `player_id`, `game_id`, `difficulty`, `score`, `date`) VALUES
+(3, 6, 1, 'facile', 10.536, '2022-11-21 00:15:40');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Utilisateur`
+-- Table structure for table `user`
 --
 
-CREATE TABLE `Utilisateur` (
-  `Identi` int(11) NOT NULL,
-  `Email` varchar(30) NOT NULL,
-  `Mdp` varchar(500) NOT NULL,
-  `Pseudo` varchar(20) NOT NULL,
-  `DateHeureInscri` date NOT NULL,
-  `DateHconnexion` date DEFAULT NULL
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `email` varchar(64) NOT NULL,
+  `username` varchar(16) NOT NULL,
+  `pass` char(60) NOT NULL,
+  `bio` varchar(128) DEFAULT NULL,
+  `creation_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `connection_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `Utilisateur`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `Utilisateur` (`Identi`, `Email`, `Mdp`, `Pseudo`, `DateHeureInscri`, `DateHconnexion`) VALUES
-(1, 'mailcommun@yahoo.com', '12345', 'Bgdelastreet', '2022-11-09', NULL),
-(7, 'mailpascommun@yahoo.com', '12345', 'RoroDu95', '2022-11-09', NULL),
-(8, 'mailrare@yahoo.com', '12345', 'Jimmy99', '2022-11-09', NULL),
-(9, 'mailepic@yahoo.com', '12345', 'WakandaWarrior', '2022-11-09', NULL),
-(10, 'maillegendaire@yahoo.com', '12345', 'SugmaMale', '2022-11-09', NULL),
-(39, 'test@gmail.com', '12345', 'BeauGosseDu69', '2022-11-09', NULL),
-(77, 'jeanjuste.lefebvre@gmail.com', 'jambon78?!', 'dqdqdqddsd', '2022-11-17', NULL),
-(78, 'dzqdqdqd@ddfez.com', 'ABCDEF78?', 'qdzddzd', '2022-11-17', NULL);
+INSERT INTO `user` (`id`, `email`, `username`, `pass`, `bio`, `creation_date`, `connection_date`) VALUES
+(6, 'jeanjuste.lefebvre@gmail.com', 'JIJI', '$2y$10$ZUG.yajKWToaVBZ.7VkzWuCfUShWckFLIDemFutbv1mjIB6/vY6.q', NULL, '2022-11-21 00:15:07', '2022-11-21 00:16:15'),
+(7, 'jiji@yahoo.com', 'LeJI', '$2y$10$AED9jcIU7aadGyJLpoZfee7Va/QKN5NuG8IpMNbdMOSkRvmCRKGuO', NULL, '2022-11-21 00:17:14', '2022-11-21 00:17:32');
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `Jeux`
+-- Indexes for table `game`
 --
-ALTER TABLE `Jeux`
-  ADD PRIMARY KEY (`IdJeu`);
+ALTER TABLE `game`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `Message`
+-- Indexes for table `message`
 --
-ALTER TABLE `Message`
-  ADD PRIMARY KEY (`IndentiMsg`),
-  ADD KEY `IdJeu` (`IdJeu`),
-  ADD KEY `IdExpe` (`IdExpe`);
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sender_id` (`sender_id`),
+  ADD KEY `game_id` (`game_id`);
 
 --
--- Index pour la table `Score`
+-- Indexes for table `score`
 --
-ALTER TABLE `Score`
-  ADD PRIMARY KEY (`IdentiScore`),
-  ADD KEY `IdJoueur` (`IdJoueur`),
-  ADD KEY `IdJeu` (`IdJeu`);
+ALTER TABLE `score`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `player_id` (`player_id`),
+  ADD KEY `game_id` (`game_id`);
 
 --
--- Index pour la table `Utilisateur`
+-- Indexes for table `user`
 --
-ALTER TABLE `Utilisateur`
-  ADD PRIMARY KEY (`Identi`),
-  ADD UNIQUE KEY `Email` (`Email`),
-  ADD UNIQUE KEY `Pseudo` (`Pseudo`);
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `Jeux`
---
-ALTER TABLE `Jeux`
-  MODIFY `IdJeu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT pour la table `Message`
---
-ALTER TABLE `Message`
-  MODIFY `IndentiMsg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT pour la table `Score`
---
-ALTER TABLE `Score`
-  MODIFY `IdentiScore` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT pour la table `Utilisateur`
---
-ALTER TABLE `Utilisateur`
-  MODIFY `Identi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
-
---
--- Contraintes pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- Contraintes pour la table `Message`
+-- AUTO_INCREMENT for table `message`
 --
-ALTER TABLE `Message`
-  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`IdJeu`) REFERENCES `jeux` (`IdJeu`),
-  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`IdExpe`) REFERENCES `utilisateur` (`Identi`);
+ALTER TABLE `message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Contraintes pour la table `Score`
+-- AUTO_INCREMENT for table `score`
 --
-ALTER TABLE `Score`
-  ADD CONSTRAINT `score_ibfk_1` FOREIGN KEY (`IdJoueur`) REFERENCES `utilisateur` (`Identi`),
-  ADD CONSTRAINT `score_ibfk_2` FOREIGN KEY (`IdJeu`) REFERENCES `jeux` (`IdJeu`);
+ALTER TABLE `score`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

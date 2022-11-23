@@ -51,6 +51,9 @@ font-family: 'Arimo Bold';
     --footer-content-background-color: #0D0A26;
     --footer-copyrights-background-color: #0c0923;
 
+    --form-error-color: red;
+    --form-success-color: #00ffaa;
+
     /* Fonts */
     --header-font: 'Arimo Bold';
     --banner-font: 'Aspira Black';
@@ -91,6 +94,10 @@ font-family: 'Arimo Bold';
 /* -------------------------------------------------------------------------- */
 /*                                   Global                                   */
 /* -------------------------------------------------------------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
     background-color: var(--default-background-color);
     margin: 0;
@@ -99,6 +106,10 @@ body {
     color: var(--paragraph-color);
     font-family: var(--paragraph-font);
     font-size: var(--paragraph-font-size);
+}
+
+p a {
+    color: var(--paragraph-color);
 }
 
 strong {
@@ -176,11 +187,25 @@ textarea, input:not([type="submit"]) {
     margin-bottom: 2%;
 }
 
+.form-msg {
+    font-size: 1.2em;
+    text-align: center;
+}
+
+    .form-error {
+        color: var(--form-error-color);
+    }
+
+    .form-success {
+        color: var(--form-success-color);
+    }
+
 /* -------------------------------------------------------------------------- */
 /*                                   Header                                   */
 /* -------------------------------------------------------------------------- */
 header {
     background-color: var(--header-color);
+    width: 100%;
 
     position: sticky;
     top: 0;
@@ -206,7 +231,7 @@ h1 {
 nav ul {
     display: flex;
     justify-content: space-between;
-    align-content: center;
+    align-items: center;
 }
 
 nav li {
@@ -222,10 +247,16 @@ nav a {
     color: var(--header-text-color);
 }
 
-nav a:hover {
+nav a:not(:has(.header-profile-pic)):hover {
     color: var(--highlight-hover-color);
     padding-block-start: 20px;
     border-top: 4px solid var(--highlight-hover-color);
+}
+
+.header-profile-pic {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -279,7 +310,7 @@ footer p, footer li {
     padding: 12px;
 
     width: auto;
-    height: 1em;
+    height: 2em;
     margin: 0 4px;
 }
 
@@ -450,9 +481,7 @@ footer p, footer li {
 /* -------------------------------------------------------------------------- */
 #homepage-header {
     background-color: var(--homepage-header-color);
-
     position: fixed;
-    width: calc(100% - 2 * var(--page-horizontal-padding)); /* 100% - 2 * horizontal padding */
 }
 
 /* ------------------------- Homepage Banner Section ------------------------ */
@@ -886,8 +915,8 @@ footer p, footer li {
 }
 
 #stats-list > .stat-display {
-    min-width: 140px;
-    max-width: 200px;
+    min-width: 200px;
+    max-width: 280px;
     padding: 2%;
 }
 
@@ -967,15 +996,4 @@ footer p, footer li {
 }
 .buttonChat{
     margin-left: 5%;
-}
-
-#salami{
-    background-color: red;
-    color: blue;
-}
-
-.error {
-    color: red;
-    font-size: 1.2em;
-    text-align: center;
 }
