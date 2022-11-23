@@ -41,7 +41,7 @@ if (isConnected()) {
     <nav>
         <ul>
             <li><a href="index.php">ACCUEIL</a></li>
-            <li><a href="<?php echo $gameLink ?>">JEU</a></li>
+            <li><a href="game.php">JEU</a></li>
             <li><a href="scores.php">SCORES</a></li>
             <li><a href="contact.php">NOUS CONTACTER</a></li>
             <?php echo $result; ?>
