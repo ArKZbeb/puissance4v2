@@ -982,5 +982,10 @@ footer p, footer li {
 .error {
     color: red;
     font-size: 1.2em;
+<<<<<<< HEAD
     text-align: center;
 }
+=======
+    text-align: centerm;
+}
+>>>>>>> c7acb9c6a37f20a9121854a2e97ca19c300f537c

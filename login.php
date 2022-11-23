@@ -2,32 +2,25 @@
 session_start();
 
 require('includes/database.inc.php');
-
-$database = connectDatabase();
+require('includes/session.inc.php');
+require('includes/email.inc.php');
+require('includes/password.inc.php');
+/* -------------------- Redirect to homepage if connected ------------------- */
+if (isConnected()) {
+    header('Location: index.php');
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+    /* ------------------------------- Connection ------------------------------- */
     if (isset($_POST['login-submit'])) {
-        $emailpost = $_POST['login-email'];
-        $passwordpost = $_POST['login-password'];
+        $email = $_POST['login-email'];
+        $password = $_POST['login-password'];
 
-        $sql = "SELECT * FROM `Utilisateur` WHERE Email = :mail AND Mdp = :mdp";
-        $request = $database->prepare($sql);
-        $request->bindParam(':mail', $emailpost);
-        $request->bindParam(':mdp', $passwordpost);
-        $request->execute();
-
-        if ($request->rowCount() < 1) {
-            echo "Email ou mot de passe incorrect";
+        if (!isEmailCorrect($email) || !isPasswordCorrect($password, $email)) {
+            $connectionError = "Email ou mot de passe incorrect";
 
         } else {
-            $_SESSION['email'] = $emailpost;
-            $_SESSION['password'] = $passwordpost;
-            $_SESSION['id'] = $request->fetch()['Identi'];
-            $_SESSION['username'] = $request->fetch()['Pseudo'];
-            $_SESSION['loggedin'] = true;
-            header('Location: index.php');
-            exit();
+            login($email);
         }
     }
 }
@@ -102,7 +95,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="password" name="login-password" id="password" placeholder="Mot de passe" required />
                 <input type="submit" name="login-submit" value="Connexion" />
             </form>
+            <?php
+            if ($connectionError != null) {
+                echo '<p class="form-msg form-error">';
+                echo $connectionError;
+                echo '</p>';
+            } else if ($_SESSION['accountCreated']) {
+                echo '<p class="form-msg form-success">Votre compte a été créé avec succès ! Connectez vous.</p>';
+                unset($_SESSION['accountCreated']);
+            }
+            ?>
             <!-- <a href="memory.php"><button>Connexion</button></a> -->
+
+            <p> Pas encore de compte ? <a href="register.php">Créez un compte.</a></p>
         </section>
     </main>
 
