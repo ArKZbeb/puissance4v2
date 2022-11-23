@@ -10,43 +10,25 @@
 <?php
     session_start();
     require('includes/database.inc.php');
+    require('includes/session.inc.php');
 ?>
 <body>
-<p class="espace">test</p>
 
-
-<?php
-    
-    
-    
-        $database = connectDatabase();
-    ?>
-    <!-- mettre une box qui affiche tout les messages de la base de donnée -->
-    <!-- mettre un formulaire pour envoyer un message -->
-    <!-- mettre un bouton pour supprimer un message -->
-    <!-- mettre un bouton pour modifier un message -->
-
-    
-
-
-    <!-- faire un chat interactif en ajax -->
     <form action="test.php" method="post">
-        <input type="text" name="message">
-        <input href="http://localhost:8888/Puissance4/puissance4v2/test.php" type="submit" value="Envoyer">
+        <label for="message">Message</label>
+        <input type="text" name="message" id="message">
+        <input type="submit" value="Envoyer">
     </form>
-    
 
-    
+
     <?php
     $iduser=$_SESSION['id'];
     $username = $_SESSION['username'];
-    $message = $_POST['message'];
-    $date = $_POST['DateHeureMsg']; 
 
-    // selectionner les messages de la base de donnée inferieur à 24 heures
-    $sql2 = "SELECT *  FROM `Message`";
-    $sql3 = "SELECT *  FROM `Utilisateur`";
-    $sql4 = "SELECT * FROM `Message` WHERE DateHeureMsg < DATE_SUB(NOW(), INTERVAL 1 DAY) order by DateHeureMsg desc";
+    $sql2 = "SELECT *  FROM `message`";
+    $sql3 = "SELECT *  FROM `user`";
+
+    // $sql4 = "SELECT * FROM `Message` WHERE date < DATE_SUB(NOW(), INTERVAL 1 DAY) order by date desc";
 
     $request = $database->prepare($sql2);
     $request->execute();
@@ -54,34 +36,38 @@
     $request2 = $database->prepare($sql3);
     $request2->execute();
     $result2 = $request2->fetchAll(PDO::FETCH_ASSOC);
-
+    
     
     foreach($result as $row){
-        echo $row['DateHeureMsg'];
+        echo $row['date'];
         echo " ";
-        echo $row['Msg'];
+        echo $row['content'];
         echo " ";
         foreach($result2 as $row){
-            echo $row['Pseudo'];
+            echo $row['username'];
         }
         echo "<br>";
     }
-    
-    // afficher les messages de l'utilisateur 1 de la base de donnée
-    
-    
 
     if (isset($_SESSION['loggedin']) ) {
         if (isset($_POST['message'])) {
-            
-            $sql = "INSERT INTO `Message` ( `Msg`, `DateHeureMsg`, `IdJeu`, `IdExpe`) VALUES (:Msg, CURRENT_TIMESTAMP, 1, :IdExpe)";
-            
+            $sql = "INSERT INTO `message` (`content`, `game_id`, `sender_id`) VALUES (:test, '1',:id_user)";
+
+            echo $sql;
+
             $message = $_POST['message'];
+
+            echo $message;
+
+
+
             $sth = $database->prepare($sql);
-            $sth->bindParam('IdExpe', $iduser);
-            $sth->bindParam('Msg', $message);
+            $sth->bindParam('test', $message);
+            $sth->bindParam('id_user', $iduser);
             $sth->execute();
-            
+
+            var_dump($sth->errorInfo(),$iduser);
+
         }
     }
     else {
