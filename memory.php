@@ -30,6 +30,17 @@ if (!isConnected()) {
             <h2>JEU</h2>
         </section>
 
+        <section class="game-window">
+            <div class="game-card">
+                <div class="card-front">
+                    <img src="assets/images/cards/.jpg" alt="image" />
+                </div>
+                <div class="card-back">
+                    <img src="assets/images/cards/.jpg" alt="image" />
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <?php
