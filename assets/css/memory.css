@@ -1,34 +1,62 @@
-.game-board {
+:root {
+    --win-color: #00ffaa;
+}
+
+#game-content {
+    padding: 40px 10%;
+    text-align: center;
+}
+
+.menu {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-board {
+    display: grid;
+    gap: 1%;
+    justify-content: center;
+    perspective: 1000px;
 }
 
 .game-card {
-    width: 300px;
-    height: 300px;
-    margin: 20px;
-    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    max-width: 120px;
+    height: auto;
+    padding: 0;
+    margin: 0;
+
     transform-style: preserve-3d;
     transition: transform 1s ease-in;
 }
 
-.card-front {
-    width: 100%;
-    height: 100%;
-    font-size: 30px;
-    position: absolute;
+.card-front,
+.card-back {
+    padding-bottom: 0;
     backface-visibility: hidden;
+    width: 100%;
+    margin: 0;
+    background-color: blue;
+    vertical-align: middle;
 }
 
 .card-front {
-    width: 100%;
-    height: 100%;
-    font-size: 30px;
     position: absolute;
-    backface-visibility: hidden;
     transform: rotateY(180deg);
+}
+
+.flip {
+    transform: rotateY(180deg);
+}
+
+.win {
+    color: var(--win-color);
+}
+
+.hide {
+    display: none;
 }
