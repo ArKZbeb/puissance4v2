@@ -16,7 +16,7 @@
 
     <form action="test.php" method="post">
         <label for="message">Message</label>
-        <input type="text" name="message" id="message">
+        <input type="text" name="message" id="message" placeholder="Message ...">
         <input type="submit" value="Envoyer">
     </form>
 
@@ -27,10 +27,10 @@
 
     $sql2 = "SELECT *  FROM `message` inner join `user` on user.id = message.sender_id";
     $sql3 = "SELECT *  FROM `user`";
+    // selectionne tous les messages de la table message qui sont de moins de 24 heures
+    $sql4 = "SELECT *  FROM `message` inner join `user` on user.id = message.sender_id WHERE message.date > DATE_SUB(NOW(), INTERVAL 1 DAY) order by message.date desc";
 
-    // $sql4 = "SELECT * FROM `Message` WHERE date < DATE_SUB(NOW(), INTERVAL 1 DAY) order by date desc";
-
-    $request = $database->prepare($sql2);
+    $request = $database->prepare($sql4);
     $request->execute();
     $result = $request->fetchAll(PDO::FETCH_ASSOC);
     $request2 = $database->prepare($sql3);
@@ -54,7 +54,8 @@
     }
 
     if (isset($_SESSION['loggedin']) ) {
-        if (isset($_POST['message'])) {
+        // fait une condition qui verifie si le message fait plus de 3 caractères
+        if (isset($_POST['message'] ) && strlen($_POST['message']) > 3) {
             $sql = "INSERT INTO `message` (`content`, `game_id`, `sender_id`) VALUES (:test, '1',:id_user)";
 
             echo $sql;
@@ -63,19 +64,18 @@
 
             echo $message;
 
-
-
             $sth = $database->prepare($sql);
             $sth->bindParam('test', $message);
             $sth->bindParam('id_user', $iduser);
             $sth->execute();
 
-             
-
+        }
+        else{
+            echo "Votre message doit faire plus de 3 caractères";
         }
     }
     else {
-        header('Location: login.php');
+        header('Location: test.php');
         echo "Vous n'êtes pas connecté";
     }
 
