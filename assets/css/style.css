@@ -96,9 +96,13 @@
 /* -------------------------------------------------------------------------- */
 /*                                   Global                                   */
 /* -------------------------------------------------------------------------- */
+<<<<<<< HEAD
 *,
 *::before,
 *::after {
+=======
+*, *::before, *::after {
+>>>>>>> 29effcd36d608659c2a0dce1c2abf147301e9375
     box-sizing: border-box;
 }
 
@@ -202,13 +206,13 @@ input:not([type="submit"]) {
     text-align: center;
 }
 
-.form-error {
-    color: var(--form-error-color);
-}
+    .form-error {
+        color: var(--form-error-color);
+    }
 
-.form-success {
-    color: var(--form-success-color);
-}
+    .form-success {
+        color: var(--form-success-color);
+    }
 
 /* -------------------------------------------------------------------------- */
 /*                                   Header                                   */
@@ -1044,4 +1048,8 @@ footer li {
 }
 .buttonChat {
     margin-left: 5%;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 29effcd36d608659c2a0dce1c2abf147301e9375
