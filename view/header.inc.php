@@ -6,7 +6,7 @@ session_start();
 /* ---------------------------- Connected or not ---------------------------- */
 if (isConnected()) {
     $result = "<li><a href='myaccount.php'>";
-    $result .= "<img class='header-profile-pic' src='assets/images/player.jpg' alt='User icon'/>";
+    $result .= "<img class='header-profile-pic' src='assets/images/player.jpg' id='profilpic' alt='User icon'/>";
     $result .= "</a></li>";
     $result .= "<li><a href='?logout'>";
     $result .= "Se déconnecter";
@@ -24,9 +24,6 @@ if (isConnected()) {
     }
 
 } else {
-    $result = "<li><a href='login.php'>";
-    $result .= "Se connecter";
-    $result .= "</a></li>";
     $result .= "<li><a href='register.php'>";
     $result .= "S'inscrire";
     $result .= "</a></li>";
@@ -48,3 +45,4 @@ if (isConnected()) {
         </ul>
     </nav>
 </header>
+
