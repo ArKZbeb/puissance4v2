@@ -3,6 +3,9 @@ function randint(min, max) {
 }
 
 const startButton = document.querySelector("#start-button");
+startButton.addEventListener("click", startGame);
+const restartButton = document.querySelector("#restart-button");
+restartButton.addEventListener("click", startGame);
 
 /* -------------------------------------------------------------------------- */
 /*                                    Board                                   */
@@ -16,7 +19,7 @@ board.style.gridTemplateColumns = "repeat(" + width + ", 1fr)";
 /* -------------------------------------------------------------------------- */
 /*                                    Cards                                   */
 /* -------------------------------------------------------------------------- */
-tries = 0;
+let tries = 0;
 let hasFlippedCard = false;
 let firstCard, secondCard;
 let flipping = false;
@@ -38,7 +41,7 @@ function checkForMatch(firstCard, secondCard) {
             firstCard.classList.toggle("flip");
             secondCard.classList.toggle("flip");
             flipping = false;
-        }, 1500);
+        }, 500);
     }
 }
 
@@ -68,14 +71,28 @@ function updateTriesCounter() {
 }
 
 function getCardList(theme, sizeX, sizeY) {
-    let cardList = getPokemonList(sizeX, sizeY);
+    let cardList = {};
+    if (theme == "pokemon") {
+        cardList = getPokemonList(sizeX, sizeY);
+    } else {
+        cardList = getLeagueList(sizeX, sizeY);
+    }
     return cardList;
 }
 
+function getImageLink(theme, cardName) {
+    if (theme == "pokemon") {
+        return getPokemonPicLink(cardName);
+    } else {
+        return getLeaguePicLink(cardName);
+    }
+}
+
+/* --------------------------------- Pokémon -------------------------------- */
 function getPokemonList(sizeX, sizeY) {
-    idList = {};
+    const idList = {};
     for (let i = 0; i < (sizeX * sizeY) / 2; i++) {
-        pokemonId = randint(1, 900);
+        let pokemonId = randint(1, 900);
         while (idList[pokemonId] != undefined) {
             pokemonId = randint(1, 900);
         }
@@ -86,14 +103,33 @@ function getPokemonList(sizeX, sizeY) {
 
 function getPokemonPicLink(id) {
     if (id < 100) {
-        let str = "" + id;
-        zeros = "000";
+        const str = "" + id;
+        const zeros = "000";
         id = zeros.substring(0, zeros.length - str.length) + str;
     }
 
     return (
         "https://assets.pokemon.com/assets/cms2/img/pokedex/full/" + id + ".png"
     );
+}
+
+/* --------------------------------- League --------------------------------- */
+import leagueJson from "../json/league.json" assert { type: "json" };
+function getLeagueList(sizeX, sizeY) {
+    const champList = {};
+    for (let i = 0; i < (sizeX * sizeY) / 2; i++) {
+        let champId = randint(0, leagueJson.length);
+        while (champList[champId] != undefined) {
+            champId = randint(0, leagueJson.length);
+        }
+        // let champName = leagueJson[champId]["name"];
+        champList[champId] = 2;
+    }
+    return champList;
+}
+
+function getLeaguePicLink(champId) {
+    return leagueJson[champId]["icon"];
 }
 
 function createCard(pairName, imgLink) {
@@ -122,14 +158,14 @@ function createBoard(theme, sizeX, sizeY) {
 
     for (let i = 0; i < sizeY; i++) {
         for (let j = 0; j < sizeX; j++) {
-            randomId = randint(0, listKeys.length - 1); // Select a random card from the list
-            cardId = listKeys[randomId]; // Get the name of the card
-            cardName = cardId;
-            imgLink = getPokemonPicLink(cardId); // Get the link of the image of the card
-            cardList[cardId]--; // Decrease the number of cards of this type to place
-            if (cardList[cardId] == 0) {
+            let randomId = randint(0, listKeys.length - 1); // Select a random card from the list
+            let cardId = listKeys[randomId]; // Get the name of the card
+            let cardName = cardId;
+            let imgLink = getImageLink(theme, cardName); // Get the link of the image of the card
+            cardList[cardName]--; // Decrease the number of cards of this type to place
+            if (cardList[cardName] == 0) {
                 // If there are no more cards of this type to place, remove it from the list
-                delete cardList[cardId];
+                delete cardList[cardName];
                 listKeys.splice(randomId, 1);
             }
             createCard(cardName, imgLink); // Place the card

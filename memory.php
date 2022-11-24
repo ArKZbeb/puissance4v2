@@ -32,7 +32,7 @@ if (!isConnected()) {
         </section>
 
         <section id="game-content">
-            <button id="start-button" onclick="startGame()">Jouer</button>
+            <button id="start-button">Jouer</button>
             <section class="menu hide">
                 <h3 class="timer">00 : 00 : 00 : 000</h3>
                 <h3 class="tries-display"><span class="tries-number">0</span> Essais</h3>
@@ -42,7 +42,7 @@ if (!isConnected()) {
 
             <section class="game-over hide">
                 <h2 class="win">Vous avez réussi !</h2>
-                <button id="start-button" onclick="startGame()">Rejouer</button>
+                <button id="restart-button">Rejouer</button>
                 <a href="scores.php">Consulter mon classement</a>
             </section>
         </section>
@@ -52,7 +52,7 @@ if (!isConnected()) {
     include 'view/footer.inc.php'
         ?>
 
-    <script src="assets/js/memory.js"></script>
+    <script type="module" src="assets/js/memory.js"></script>
 </body>
 
 </html>
