@@ -24,9 +24,6 @@ if (isConnected()) {
     }
 
 } else {
-    $result = "<li><a href='login.php'>";
-    $result .= "Se connecter";
-    $result .= "</a></li>";
     $result .= "<li><a href='register.php'>";
     $result .= "S'inscrire";
     $result .= "</a></li>";
