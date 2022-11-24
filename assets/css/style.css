@@ -636,6 +636,10 @@ footer li {
 }
 
 /* ---------------------------- About Us Section ---------------------------- */
+.header-profile-pic{
+    width: 34px;
+    border-radius: 50% 50%;
+}
 
 #about-us {
     padding-bottom: 4%;
