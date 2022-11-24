@@ -724,6 +724,23 @@ footer li {
     padding-left: 30%;
     padding-right: 30%;
 }
+/* Register Password strength indicator*/
+.progress {
+    height: 3px !important;
+    margin-top: -5px !important;
+    margin-bottom: -10px !important;
+    margin-left: 1%;
+    width: 98%;
+}
+.progress-bar-danger {
+    background-color: #e90f10;
+}
+.progress-bar-warning{
+    background-color: #ffad00;
+}
+.progress-bar-success{
+    background-color: #02b502;
+}
 
 /* Contact page */
 #contact-info {
