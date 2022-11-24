@@ -25,7 +25,7 @@
     $iduser=$_SESSION['id'];
     $username = $_SESSION['username'];
 
-    $sql2 = "SELECT *  FROM `message`";
+    $sql2 = "SELECT *  FROM `message` inner join `user` on user.id = message.sender_id";
     $sql3 = "SELECT *  FROM `user`";
 
     // $sql4 = "SELECT * FROM `Message` WHERE date < DATE_SUB(NOW(), INTERVAL 1 DAY) order by date desc";
@@ -36,15 +36,19 @@
     $request2 = $database->prepare($sql3);
     $request2->execute();
     $result2 = $request2->fetchAll(PDO::FETCH_ASSOC);
-    
+        
+
     
     foreach($result as $row){
         echo $row['date'];
         echo " ";
         echo $row['content'];
         echo " ";
-        foreach($result2 as $row){
-            echo $row['username'];
+
+        foreach($result2 as $row2){
+            if($row['sender_id'] == $row2['id']){
+                echo $row2['username'];
+            }
         }
         echo "<br>";
     }
@@ -66,7 +70,7 @@
             $sth->bindParam('id_user', $iduser);
             $sth->execute();
 
-            var_dump($sth->errorInfo(),$iduser);
+             
 
         }
     }
