@@ -6,7 +6,7 @@ session_start();
 /* ---------------------------- Connected or not ---------------------------- */
 if (isConnected()) {
     $result = "<li><a href='myaccount.php'>";
-    $result .= "<img class='header-profile-pic' src='assets/images/player.jpg' alt='User icon'/>";
+    $result .= "<img class='header-profile-pic' src='assets/images/player.jpg' id='profilpic' alt='User icon'/>";
     $result .= "</a></li>";
     $result .= "<li><a href='?logout'>";
     $result .= "Se déconnecter";
@@ -41,8 +41,8 @@ if (isConnected()) {
             <li><a href="game.php">JEU</a></li>
             <li><a href="scores.php">SCORES</a></li>
             <li><a href="contact.php">NOUS CONTACTER</a></li>
-            <li><a href="login.php"><img src="./assets/images/defaultpp.jpg" id="profilpic" ></a></li>
             <?php echo $result; ?>
         </ul>
     </nav>
 </header>
+
