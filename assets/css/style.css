@@ -101,14 +101,14 @@
 *,
 *::before,
 *::after {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 >>>>>>> 69a7e4bc8595ff48609962a244c9f90837dd8e4a
 body {
     background-color: var(--default-background-color);
-    margin: 0;
-    padding: 0;
 
     color: var(--paragraph-color);
     font-family: var(--paragraph-font);
@@ -133,7 +133,7 @@ section,
 img {
     width: 100%;
     height: auto;
-    /* vertical-align: middle; */
+    vertical-align: middle;
 }
 
 /* --------------------------------- Buttons -------------------------------- */
@@ -171,17 +171,10 @@ h4 {
     font-size: var(--title-font-size);
 }
 
-h3,
-h4 {
-    margin: 0;
-}
-
 /* ---------------------------------- Forms --------------------------------- */
 form {
     display: flex;
     flex-direction: column;
-
-    /* width: 100%; */
 }
 
 textarea,
@@ -724,6 +717,23 @@ footer li {
 #login-form {
     padding-left: 30%;
     padding-right: 30%;
+}
+/* Register Password strength indicator*/
+.progress {
+    height: 3px !important;
+    margin-top: -5px !important;
+    margin-bottom: -10px !important;
+    margin-left: 1%;
+    width: 98%;
+}
+.progress-bar-danger {
+    background-color: #e90f10;
+}
+.progress-bar-warning{
+    background-color: #ffad00;
+}
+.progress-bar-success{
+    background-color: #02b502;
 }
 
 /* Contact page */
