@@ -13,74 +13,77 @@
     require('includes/session.inc.php');
 ?>
 <body>
-
-    <form action="test.php" method="post">
-        <label for="message">Message</label>
-        <input type="text" name="message" id="message" placeholder="Message ...">
-        <input type="submit" value="Envoyer">
-    </form>
-
-
-    <?php
-    $iduser=$_SESSION['id'];
-    $username = $_SESSION['username'];
-
-    $sql2 = "SELECT *  FROM `message` inner join `user` on user.id = message.sender_id";
-    $sql3 = "SELECT *  FROM `user`";
-    // selectionne tous les messages de la table message qui sont de moins de 24 heures
-    $sql4 = "SELECT *  FROM `message` inner join `user` on user.id = message.sender_id WHERE message.date > DATE_SUB(NOW(), INTERVAL 1 DAY) order by message.date desc";
-
-    $request = $database->prepare($sql4);
-    $request->execute();
-    $result = $request->fetchAll(PDO::FETCH_ASSOC);
-    $request2 = $database->prepare($sql3);
-    $request2->execute();
-    $result2 = $request2->fetchAll(PDO::FETCH_ASSOC);
-        
-
     
-    foreach($result as $row){
-        echo $row['date'];
-        echo " ";
-        echo $row['content'];
-        echo " ";
+    <div class="test">
+        <?php
+        $iduser=$_SESSION['id'];
+        $username = $_SESSION['username'];
 
-        foreach($result2 as $row2){
-            if($row['sender_id'] == $row2['id']){
-                echo $row2['username'];
+        $sql2 = "SELECT *  FROM `message` inner join `user` on user.id = message.sender_id";
+        $sql3 = "SELECT *  FROM `user`";
+        $sql4 = "SELECT *  FROM `message` inner join `user` on user.id = message.sender_id WHERE message.date > DATE_SUB(NOW(), INTERVAL 1 DAY) order by message.date asc";
+
+        $request = $database->prepare($sql4);
+        $request->execute();
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        $request2 = $database->prepare($sql3);
+        $request2->execute();
+        $result2 = $request2->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+
+        <div class="backchat">
+            <?php
+            if (isset($_SESSION['loggedin']) ) {
+                if (isset($_POST['message'] ) && strlen($_POST['message']) > 3) {
+                    $sql = "INSERT INTO `message` (`content`, `game_id`, `sender_id`) VALUES (:test, '1',:id_user)";
+
+                    $message = $_POST['message'];
+
+
+                    $sth = $database->prepare($sql);
+                    $sth->bindParam('test', $message);
+                    $sth->bindParam('id_user', $iduser);
+                    $sth->execute();
+
+                }
+                else{
+                    echo "Votre message doit faire plus de 3 caractères";
+                    echo "<br>";
+                }
             }
-        }
-        echo "<br>";
-    }
+            else {
+                header('Location: test.php');
+                echo "Vous n'êtes pas connecté";
+            }
+            ?>
+    <section class="backchat2">
+        <?php
+                foreach($result as $row){
+                    echo $row['date'];
+                    echo " ";
+                    echo $row['content'];
+                    echo " ";
+                    foreach($result2 as $row2){
+                        if($row['sender_id'] == $row2['id']){
+                            echo $row2['username'];
+                        }
+                    }
+                    echo "<br>";
+                }
+                
+                ?>
 
-    if (isset($_SESSION['loggedin']) ) {
-        // fait une condition qui verifie si le message fait plus de 3 caractères
-        if (isset($_POST['message'] ) && strlen($_POST['message']) > 3) {
-            $sql = "INSERT INTO `message` (`content`, `game_id`, `sender_id`) VALUES (:test, '1',:id_user)";
+            </div>
 
-            echo $sql;
+            <form action="test.php" method="post">
+                
+                <input type="text" name="message" id="message" class="messagechat" placeholder="Message ...">
+                <input type="submit" class="buttonchat" value="Envoyer">
+            </form>
+    </section>
+    </div>
 
-            $message = $_POST['message'];
-
-            echo $message;
-
-            $sth = $database->prepare($sql);
-            $sth->bindParam('test', $message);
-            $sth->bindParam('id_user', $iduser);
-            $sth->execute();
-
-        }
-        else{
-            echo "Votre message doit faire plus de 3 caractères";
-        }
-    }
-    else {
-        header('Location: test.php');
-        echo "Vous n'êtes pas connecté";
-    }
-
-    ?>
-    
+    <script src="assets/js/chat.js"></script>
 
 
     
