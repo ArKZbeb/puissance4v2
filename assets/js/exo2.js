@@ -46,3 +46,7 @@ addCard("FUCK", 450, 500);
 
 
 const containers = document.querySelectorAll(".containerSquare");
+
+//let face = document.querySelectorAll("");
+//let back = document.querySelectorAll("");
+
