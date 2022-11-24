@@ -44,6 +44,7 @@ if (isConnected()) {
             <li><a href="game.php">JEU</a></li>
             <li><a href="scores.php">SCORES</a></li>
             <li><a href="contact.php">NOUS CONTACTER</a></li>
+            <li><a href="login.php"><img src="./assets/images/defaultpp.jpg" id="profilpic" ></a></li>
             <?php echo $result; ?>
         </ul>
     </nav>
