@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         } else {
             login($email);
+            unset($_SESSION['accountCreated']);
         }
     }
 }
@@ -102,7 +103,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 echo '</p>';
             } else if ($_SESSION['accountCreated']) {
                 echo '<p class="form-msg form-success">Votre compte a été créé avec succès ! Connectez vous.</p>';
-                unset($_SESSION['accountCreated']);
             }
             ?>
             <!-- <a href="memory.php"><button>Connexion</button></a> -->

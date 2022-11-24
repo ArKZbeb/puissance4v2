@@ -97,6 +97,7 @@
 /*                                   Global                                   */
 /* -------------------------------------------------------------------------- */
 <<<<<<< HEAD
+<<<<<<< HEAD
 *,
 *::before,
 *::after {
@@ -106,10 +107,20 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: var(--default-background-color);
+=======
+=======
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+>>>>>>> 69a7e4bc8595ff48609962a244c9f90837dd8e4a
+>>>>>>> 02cdc182520137dff40b08d03e18357cfa4033ac
+body {
+    background-color: var(--default-background-color);
 
     color: var(--paragraph-color);
     font-family: var(--paragraph-font);
@@ -134,7 +145,7 @@ section,
 img {
     width: 100%;
     height: auto;
-    /* vertical-align: middle; */
+    vertical-align: middle;
 }
 
 /* --------------------------------- Buttons -------------------------------- */
@@ -172,17 +183,10 @@ h4 {
     font-size: var(--title-font-size);
 }
 
-h3,
-h4 {
-    margin: 0;
-}
-
 /* ---------------------------------- Forms --------------------------------- */
 form {
     display: flex;
     flex-direction: column;
-
-    /* width: 100%; */
 }
 
 textarea,
@@ -201,6 +205,11 @@ input:not([type="submit"]) {
     margin-bottom: 2%;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 02cdc182520137dff40b08d03e18357cfa4033ac
 .form-msg {
     font-size: 1.2em;
     text-align: center;
@@ -214,6 +223,10 @@ input:not([type="submit"]) {
         color: var(--form-success-color);
     }
 
+<<<<<<< HEAD
+=======
+>>>>>>> 69a7e4bc8595ff48609962a244c9f90837dd8e4a
+>>>>>>> 02cdc182520137dff40b08d03e18357cfa4033ac
 /* -------------------------------------------------------------------------- */
 /*                                   Header                                   */
 /* -------------------------------------------------------------------------- */
@@ -728,6 +741,23 @@ footer li {
     padding-left: 30%;
     padding-right: 30%;
 }
+/* Register Password strength indicator*/
+.progress {
+    height: 3px !important;
+    margin-top: -5px !important;
+    margin-bottom: -10px !important;
+    margin-left: 1%;
+    width: 98%;
+}
+.progress-bar-danger {
+    background-color: #e90f10;
+}
+.progress-bar-warning{
+    background-color: #ffad00;
+}
+.progress-bar-success{
+    background-color: #02b502;
+}
 
 /* Contact page */
 #contact-info {
@@ -1050,6 +1080,23 @@ footer li {
     margin-left: 5%;
 <<<<<<< HEAD
 }
+<<<<<<< HEAD
 =======
 }
 >>>>>>> 29effcd36d608659c2a0dce1c2abf147301e9375
+=======
+<<<<<<< HEAD
+
+#salami{
+    background-color: red;
+    color: blue;
+}
+
+.error {
+    color: red;
+    font-size: 1.2em;
+    text-align: centerm;
+}
+=======
+>>>>>>> 69a7e4bc8595ff48609962a244c9f90837dd8e4a
+>>>>>>> 02cdc182520137dff40b08d03e18357cfa4033ac
