@@ -38,3 +38,5 @@ for (let i = 0; i < difficluty; i++) {
 }
 
 createBoard(difficluty);
+
+
