@@ -1,5 +1,9 @@
 <?php
 require('includes/database.inc.php');
+<<<<<<< HEAD
+
+$database = connectDatabase();
+=======
 require('includes/session.inc.php');
 require('includes/email.inc.php');
 require('includes/password.inc.php');
@@ -73,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
+>>>>>>> c7acb9c6a37f20a9121854a2e97ca19c300f537c
 ?>
 
 <!DOCTYPE html>
@@ -142,10 +147,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <section id="my-profile-management">
             <h4>Changer de mail</h4>
+<<<<<<< HEAD
+            <form action="">
+                <input type="email" placeholder="Nouveau mail" required />
+                <input type="password" placeholder="Mot de passe" required />
+                <button type="submit" name="fromage">Changer de mail</button>
+=======
             <form action="myaccount.php" method="POST">
                 <input type="email" name="new-email" placeholder="Nouveau mail" required />
                 <input type="password" name="new-email-password" placeholder="Mot de passe" required />
                 <input type="submit" name="new-email-submit" value="Changer d'email" />
+>>>>>>> c7acb9c6a37f20a9121854a2e97ca19c300f537c
             </form>
             <?php
             if ($newEmailError != null) {

@@ -1,23 +1,24 @@
 <?php
 require('includes/database.inc.php');
-/* ------------------------------- Live stats ------------------------------- */
-$sql = "SELECT * FROM `score`";
+
+$database = connectDatabase();
+
+// récupérer la liste des utilisateurs
+$sql = "SELECT * FROM `utilisateur`";
+$request = $database->query($sql);
+// stocker le nombre d'utilisateur dans une variable
+$NombreUtilisateur = $request->rowCount();
+
+$sql = "SELECT * FROM `Score`";
 $request = $database->query($sql);
 $nbrPartie = $request->rowCount();
 
-$sql = "SELECT * FROM `user` WHERE connection_date > DATE_SUB(NOW(), INTERVAL 5 MINUTE)";
+$sql = "SELECT MAX(ScorePartie) FROM `Score`";
 $request = $database->query($sql);
-$nbrOnline = $request->rowCount();
-
-$sql = "SELECT MIN(score) FROM `score`";
-$request = $database->query($sql);
-$result = $request->fetch();
-$highScore = round($result['MIN(score)'], 3);
-
-$sql = "SELECT * FROM `user`";
-$request = $database->query($sql);
-$NombreUtilisateur = $request->rowCount();
+$highScore = $request->fetch()['MAX(ScorePartie)'];
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,13 +35,14 @@ $NombreUtilisateur = $request->rowCount();
 
 <body>
     <?php
-    $includePage = "homepage";
     include 'view/header.inc.php';
     ?>
 
     <a href="#homepage-banner"><button id="fixed-button">⏏</button></a>
 
     <main>
+
+
         <section class="banner" id="homepage-banner">
             <h2>BIENVENUE DANS NOTRE STUDIO !</h2>
             <p>Venez challenger les cerveaux les plus agiles !</p>
@@ -107,31 +109,24 @@ $NombreUtilisateur = $request->rowCount();
             <div class="stats-container">
                 <div class="stats-row">
                     <article id="stat1" class="stat-display">
-                        <h3>
-                            <?php echo $nbrPartie ?>
-                        </h3>
+                        <h3><?php echo $nbrPartie?></h3>
                         <h4>Parties Jouées</h4>
                     </article>
 
                     <article id="stat2" class="stat-display">
-                        <h3>
-                            <?php echo $nbrOnline ?>
-                        </h3>
+                        <h3></h3>
                         <h4>Joueurs connectés</h4>
                     </article>
                 </div>
 
                 <div class="stats-row">
                     <article id="stat3" class="stat-display">
-                        <h3>
-                            <?php echo $highScore ?> sec
-                        </h3>
+                        <h3><?php echo $highScore ?> sec</h3>
                         <h4>Temps Record</h4>
                     </article>
 
                     <article id="stat4" class="stat-display">
-                        <h3>
-                            <?php echo $NombreUtilisateur //variable ?></h3>
+                        <h3><?php echo $NombreUtilisateur//variable ?></h3>
                         <h4>Joueurs Inscrits</h4>
                     </article>
                 </div>
