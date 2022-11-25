@@ -1,14 +1,17 @@
 <?php
-require('includes/database.inc.php');
 
-$database = connectDatabase();
+
+require('includes/database.inc.php');
+//die('e');
+$database = connectDatabase('database');
+//die('eee');
 
 // récupérer la liste des utilisateurs
 $sql = "SELECT * FROM `utilisateur`";
 $request = $database->query($sql);
 // stocker le nombre d'utilisateur dans une variable
 $NombreUtilisateur = $request->rowCount();
-
+die('e');
 $sql = "SELECT * FROM `Score`";
 $request = $database->query($sql);
 $nbrPartie = $request->rowCount();

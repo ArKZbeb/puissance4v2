@@ -99,35 +99,11 @@
 /* -------------------------------------------------------------------------- */
 /*                                   Global                                   */
 /* -------------------------------------------------------------------------- */
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-*,
-*::before,
-*::after {
-=======
+
 *, *::before, *::after {
->>>>>>> 29effcd36d608659c2a0dce1c2abf147301e9375
     box-sizing: border-box;
 }
 
-=======
-=======
-=======
->>>>>>> aad6f3d22b19a305c3ab7cf09bc66604bbbf17f8
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-<<<<<<< HEAD
->>>>>>> 69a7e4bc8595ff48609962a244c9f90837dd8e4a
->>>>>>> 02cdc182520137dff40b08d03e18357cfa4033ac
-=======
->>>>>>> aad6f3d22b19a305c3ab7cf09bc66604bbbf17f8
 body {
     background-color: var(--default-background-color);
 
@@ -218,14 +194,7 @@ input:not([type="submit"]) {
     margin-bottom: 2%;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 02cdc182520137dff40b08d03e18357cfa4033ac
-=======
->>>>>>> aad6f3d22b19a305c3ab7cf09bc66604bbbf17f8
+
 .form-msg {
     font-size: 1.2em;
     text-align: center;
@@ -239,13 +208,6 @@ input:not([type="submit"]) {
         color: var(--form-success-color);
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 69a7e4bc8595ff48609962a244c9f90837dd8e4a
->>>>>>> 02cdc182520137dff40b08d03e18357cfa4033ac
-=======
->>>>>>> aad6f3d22b19a305c3ab7cf09bc66604bbbf17f8
 /* -------------------------------------------------------------------------- */
 /*                                   Header                                   */
 /* -------------------------------------------------------------------------- */
@@ -300,16 +262,15 @@ nav a:not(:has(.header-profile-pic)):hover {
     border-top: 4px solid var(--highlight-hover-color);
 }
 
-<<<<<<< HEAD
 #profilpic{
     width: 20px;
     border-radius: 50% 50%;
-=======
+}
 .header-profile-pic {
     border-radius: 50%;
     width: 40px;
     height: 40px;
->>>>>>> aad6f3d22b19a305c3ab7cf09bc66604bbbf17f8
+
 }
 
 /* -------------------------------------------------------------------------- */
@@ -685,6 +646,10 @@ footer li {
 }
 
 /* ---------------------------- About Us Section ---------------------------- */
+.header-profile-pic{
+    width: 34px;
+    border-radius: 50% 50%;
+}
 
 #about-us {
     padding-bottom: 4%;
@@ -765,23 +730,6 @@ footer li {
 #login-form {
     padding-left: 30%;
     padding-right: 30%;
-}
-/* Register Password strength indicator*/
-.progress {
-    height: 12px !important;
-    margin-top: 10px !important;
-    margin-bottom: 12px !important;
-    margin-left: 1%;
-    width: 98%;
-}
-.progress-bar-danger {
-    background-color: #e90f10;
-}
-.progress-bar-warning{
-    background-color: #ffad00;
-}
-.progress-bar-success{
-    background-color: #02b502;
 }
 
 /* Contact page */
@@ -1103,16 +1051,7 @@ footer li {
 }
 .buttonChat {
     margin-left: 5%;
-<<<<<<< HEAD
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-}
->>>>>>> 29effcd36d608659c2a0dce1c2abf147301e9375
-=======
-<<<<<<< HEAD
-
 #salami{
     background-color: red;
     color: blue;
@@ -1123,8 +1062,27 @@ footer li {
     font-size: 1.2em;
     text-align: centerm;
 }
-=======
->>>>>>> 69a7e4bc8595ff48609962a244c9f90837dd8e4a
->>>>>>> 02cdc182520137dff40b08d03e18357cfa4033ac
-=======
->>>>>>> aad6f3d22b19a305c3ab7cf09bc66604bbbf17f8
+.backchat{
+    background-color: rgb(0, 170, 255);
+    margin-top: 0%;
+    margin-bottom: 0%;
+    background-size: 20vw;
+    border-radius: 5px;
+}
+.backchat2{
+    background-color: rgb(255, 255, 255);
+    margin-top: 0%;
+    margin-bottom: 0%;
+    background-size: 5%;
+    border-radius: 5px;
+}
+.messagechat{
+    color: #131234;
+    width: 100vw;
+}
+.buttonChat{
+    width: 5%;
+}
+.test{
+    background-size: 20%;
+}
