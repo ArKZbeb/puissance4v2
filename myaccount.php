@@ -8,7 +8,33 @@ require('includes/password.inc.php');
 if (!isConnected()) {
     header('Location: index.php');
 }
+/* -------------------------------------------------------------------------- */
+/*                                    Stats                                   */
+/* -------------------------------------------------------------------------- */
+/* -------------------------------- Position -------------------------------- */
+$positionEasy = getPosition("easy", $_SESSION['id']);
+$positionNormal = getPosition("normal", $_SESSION['id']);
+$positionHard = getPosition("hard", $_SESSION['id']);
 
+/* ---------------------------------- Score --------------------------------- */
+$highScoreEasy = getBestTime("easy", $_SESSION['id']);
+$highScoreNormal = getBestTime("normal", $_SESSION['id']);
+$highScoreHard = getBestTime("hard", $_SESSION['id']);
+
+/* ----------------------------- Number of game ----------------------------- */
+$gamePlayedEasy = getNumberOfGames("easy", $_SESSION['id']);
+$gamePlayedNormal = getNumberOfGames("normal", $_SESSION['id']);
+$gamePlayedHard = getNumberOfGames("hard", $_SESSION['id']);
+
+/* --------------------------- Lowest tries number -------------------------- */
+$minTriesEasy = getMinTries("easy", $_SESSION['id']);
+$minTriesNormal = getMinTries("normal", $_SESSION['id']);
+$minTriesHard = getMinTries("hard", $_SESSION['id']);
+
+
+/* -------------------------------------------------------------------------- */
+/*                             Account management                             */
+/* -------------------------------------------------------------------------- */
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     /* ------------------------------ Update email ------------------------------ */
     if (isset($_POST['new-email-submit'])) {
@@ -101,7 +127,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <section id="my-profile">
             <div id="my-profile-pic">
-                <img src="assets/images/player.jpg" alt="Your profile picture" />
+                <img src="assets/images/profiles/<?php echo getProfilePic($_SESSION['id']); ?>"
+                    alt="Your profile picture" />
             </div>
             <h3>
                 <?php echo $_SESSION['username'] ?>
@@ -111,33 +138,105 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </section>
 
         <section id="my-stats">
-            <div id="difficulty-selector">
-                <h4>Facile</h4>
-                <h4>Normal</h4>
-                <h4 id="selected-difficulty">Difficile</h4>
-            </div>
+            <section id="easy">
+                <h3 class="difficulty">Facile</h3>
+                <div id="stats-list">
+                    <article class="stat-display stat1">
+                        <h3>
+                            <?php echo $positionEasy; ?>
+                        </h3>
+                        <h4>Position</h4>
+                    </article>
 
-            <div id="stats-list">
-                <article class="stat-display" id="stat1">
-                    <h3>420</h3>
-                    <h4>Position</h4>
-                </article>
+                    <article class="stat-display stat2">
+                        <h3>
+                            <?php echo round($highScoreEasy, 3); ?> sec
+                        </h3>
+                        <h4>Meilleur Temps</h4>
+                    </article>
 
-                <article class="stat-display" id="stat2">
-                    <h3>69 420</h3>
-                    <h4>Meilleur Score</h4>
-                </article>
+                    <article class="stat-display stat3">
+                        <h3>
+                            <?php echo $gamePlayedEasy; ?>
+                        </h3>
+                        <h4>Parties jouées</h4>
+                    </article>
 
-                <article class="stat-display" id="stat3">
-                    <h3>14</h3>
-                    <h4>Parties jouées</h4>
-                </article>
+                    <article class="stat-display stat4">
+                        <h3>
+                            <?php echo $minTriesEasy; ?>
+                        </h3>
+                        <h4>Record d'essais</h4>
+                    </article>
+                </div>
+            </section>
 
-                <article class="stat-display" id="stat4">
-                    <h3>9</h3>
-                    <h4>Parties gagnées</h4>
-                </article>
-            </div>
+            <section id="normal">
+                <h3 class="difficulty">Normal</h3>
+                <div id="stats-list">
+                    <article class="stat-display stat1">
+                        <h3>
+                            <?php echo $positionNormal; ?>
+                        </h3>
+                        <h4>Position</h4>
+                    </article>
+
+                    <article class="stat-display stat2">
+                        <h3>
+                            <?php echo round($highScoreNormal, 3); ?> sec
+                        </h3>
+                        <h4>Meilleur Temps</h4>
+                    </article>
+
+                    <article class="stat-display stat3">
+                        <h3>
+                            <?php echo $gamePlayedNormal; ?>
+                        </h3>
+                        <h4>Parties jouées</h4>
+                    </article>
+
+                    <article class="stat-display stat4">
+                        <h3>
+                            <?php echo $minTriesNormal; ?>
+                        </h3>
+                        <h4>Record d'essais</h4>
+                    </article>
+                </div>
+            </section>
+
+            <section id="hard">
+                <h3 class="difficulty">Difficile</h3>
+                <div id="stats-list">
+                    <article class="stat-display stat1">
+                        <h3>
+                            <?php echo $positionHard; ?>
+                        </h3>
+                        <h4>Position</h4>
+                    </article>
+
+                    <article class="stat-display stat2">
+                        <h3>
+                            <?php echo round($highScoreHard, 3); ?> sec
+                        </h3>
+                        <h4>Meilleur Temps</h4>
+                    </article>
+
+                    <article class="stat-display stat3">
+                        <h3>
+                            <?php echo $gamePlayedHard; ?>
+                        </h3>
+                        <h4>Parties jouées</h4>
+                    </article>
+
+                    <article class="stat-display stat4">
+                        <h3>
+                            <?php echo $minTriesHard; ?>
+                        </h3>
+                        <h4>Record d'essais</h4>
+                    </article>
+                </div>
+            </section>
+
         </section>
 
         <section id="my-profile-management">
@@ -163,6 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <form action="myaccount.php" method="POST">
                 <input type="password" name="old-password" placeholder="Ancien mot de passe" required />
                 <input type="password" name="new-password" placeholder="Nouveau mot de passe" required />
+
                 <input type="password" name="new-password-repeat" placeholder="Confirmer le nouveau mot de passe"
                     required />
                 <input type="submit" name="new-password-submit" value="Changer de mot de passe" />

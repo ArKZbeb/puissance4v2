@@ -1,3 +1,13 @@
+<?php
+require_once('includes/session.inc.php');
+
+if (isConnected()) {
+    $gameLink = "memory.php";
+} else {
+    $gameLink = "login.php";
+}
+?>
+
 <footer>
     <div id="footer-content">
         <div id="infos">
@@ -38,9 +48,10 @@
             <h4>Power Of Memory</h4>
 
             <ul>
-                <li><a href="register.php">Jouer !</a></li>
+                <li><a href="<?php echo $gameLink; ?>">Jouer !</a></li>
                 <li><a href="scores.php">Les scores</a></li>
                 <li><a href="contact.php">Nous contacter</a></li>
+                <li><a href="test.php">Chat</a></li>
             </ul>
         </div>
     </div>

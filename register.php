@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>" />
     <title>The Power Of Memory</title>
@@ -70,6 +71,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="email" name="email" id="email" placeholder="Email" required />
                 <input type="text" name="username" id="username" placeholder="Pseudo" required />
                 <input type="password" name="password" id="password" placeholder="Mot de passe" required />
+
+                <div id="popover-password">
+                    <p><span id="result"></span></p>
+                    <div class="progress">
+                        <div id="password-strength" class="progress-bar" role="progressbar" aria-valuenow="40"
+                            aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                        </div>
+                    </div>
+                </div>
+
                 <input type="password" name="password-repeat" id="password-repeat"
                     placeholder="Confirmez le mot de passe" required />
                 <input type="submit" name="register-submit" value="Inscription" />
@@ -90,6 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php
     include 'view/footer.inc.php'
         ?>
+    <script src="assets/js/register.js"></script>
 </body>
 
 </html>

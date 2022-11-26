@@ -629,16 +629,16 @@ footer li {
     text-align: center;
 }
 
-#stat1 {
+.stat1 {
     background-color: #3724a0;
 }
-#stat2 {
+.stat2 {
     background-color: #16a25f;
 }
-#stat3 {
+.stat3 {
     background-color: #b91ba8;
 }
-#stat4 {
+.stat4 {
     background-color: #ec9122;
 }
 
@@ -802,54 +802,51 @@ footer li {
     min-height: 200px;
 }
 
+/* Register Password strength indicator*/
+.progress {
+    height: 10px !important;
+    margin-top: 10px !important;
+    margin-bottom: 12px !important;
+    margin-left: 1%;
+    width: 98%;
+}
+.progress-bar-danger {
+    background-color: #e90f10;
+}
+.progress-bar-warning {
+    background-color: #ffad00;
+}
+.progress-bar-success {
+    background-color: #02b502;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                  Game Page                                 */
+/* -------------------------------------------------------------------------- */
+.select-options {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+select {
+    width: 80%;
+    height: 50px;
+    border: none;
+    background-color: var(--information-background-color);
+    color: var(--highlight-color);
+    font-family: var(--paragraph-font);
+    font-size: 1.2rem;
+    padding: 0 1%;
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                 Scores Page                                */
 /* -------------------------------------------------------------------------- */
+
 #leaderboard {
-    padding-top: 4%;
-    padding-bottom: 4%;
-
     text-align: center;
-}
-
-#leaderboard-header {
-    display: flex;
-    justify-content: space-between;
-
-    border-bottom: 4px solid var(--highlight-color);
-    padding-bottom: 1%;
-    padding-left: calc(6.5% + 6vw);
-    padding-right: 4.5%;
-    margin-bottom: 2%;
-}
-
-.player-stats-display {
-    background-color: var(--information-background-color);
-    color: var(--title-color);
-
-    border-radius: var(--rounded-border-radius);
-
-    display: flex;
-    align-items: center;
-
-    padding: 2% 4%;
-    margin: 0 0 1%;
-}
-
-.player-stats-display img {
-    width: 6vw;
-    height: auto;
-    border-radius: 50%;
-
-    margin-right: 2%;
-}
-
-.player-stats-display strong {
-    color: white;
-}
-
-.player-stats-display:not(#self-stats) {
-    opacity: 0.6;
 }
 
 .top1 {
@@ -862,30 +859,59 @@ footer li {
     background-color: #cd7f32;
 }
 
-.player-stats {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
+table {
+    table-layout: fixed;
     width: 100%;
+    border-spacing: 0 16px;
+    margin-bottom: 40px;
 }
 
-.stat {
-    flex: 1;
-    display: flex;
-    justify-content: center;
+.profile-pic {
+    margin: 0;
+    height: 64px;
+    width: auto;
+    border-radius: 50%;
+    margin-right: 16px;
 }
 
-.stat:first-child > span {
-    margin-right: auto;
+th {
+    border-bottom: 4px solid var(--highlight-color);
 }
-.stat:last-child > span {
-    margin-left: auto;
+
+tbody tr {
+    background-color: var(--information-background-color);
+}
+
+tbody td {
+    padding: 20px 0;
+    text-align: center;
+}
+tbody td:first-of-type {
+    border-radius: var(--rounded-border-radius) 0 0 var(--rounded-border-radius);
+}
+tbody td:last-of-type {
+    border-radius: 0 var(--rounded-border-radius) var(--rounded-border-radius) 0;
+}
+
+tbody tr:not(.self-stats) {
+    opacity: 0.6;
+}
+
+.cell-pic {
+    text-align: right;
+}
+.cell-name {
+    text-align: left;
 }
 
 /* -------------------------------------------------------------------------- */
 /*                                Profile Page                                */
 /* -------------------------------------------------------------------------- */
+.difficulty {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 #my-profile {
     background-color: var(--highlight-background-color);
 
@@ -931,14 +957,6 @@ footer li {
     padding-bottom: 4%;
 }
 
-#difficulty-selector {
-    display: flex;
-    justify-content: space-between;
-
-    width: 50%;
-    margin: 0 auto;
-}
-
 #stats-list {
     display: flex;
     flex-wrap: wrap;
@@ -947,22 +965,8 @@ footer li {
     border-radius: var(--rounded-border-radius);
 }
 
-#selected-difficulty,
 #stats-list {
     background-color: var(--information-background-color);
-}
-
-#selected-difficulty {
-    border-radius: var(--rounded-border-radius) var(--rounded-border-radius) 0 0;
-}
-
-#difficulty-selector > h4 {
-    padding: 2%;
-}
-
-#difficulty-selector > h4:not(#selected-difficulty):hover {
-    color: var(--link-hover-color);
-    cursor: pointer;
 }
 
 #stats-list > .stat-display {
@@ -971,7 +975,9 @@ footer li {
     padding: 2%;
 }
 
-/* chat */
+/* -------------------------------------------------------------------------- */
+/*                                    Chat                                    */
+/* -------------------------------------------------------------------------- */
 .test-text {
     background-color: rgb(0, 255, 247);
     width: 20%;

@@ -1,3 +1,8 @@
+<?php
+require('includes/database.inc.php');
+require('includes/session.inc.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,169 +28,15 @@
         </section>
 
         <section id="leaderboard">
-            <div id="leaderboard-header">
-                <h4>Profil</h4>
-                <h4>Position</h4>
-                <h4>Temps</h4>
-            </div>
+            <h3 class="difficulty">Facile</h3>
+            <?php createLeaderboard("easy", $_SESSION['id']) ?>
 
-            <article class="player-stats-display top1">
-                <img src="assets/images/top1.jpg" alt="Player's profile pic" />
+            <h3 class="difficulty">Normal</h3>
+            <?php createLeaderboard("normal", $_SESSION['id']) ?>
 
-                <div class="player-stats">
-                    <div class="stat">
-                        <span>
-                            <h4>AndréLicorne</h4>
-                        </span>
-                    </div>
-                    <div class="stat">
-                        <span>
-                            <p class="position">
-                                <strong>1</strong>
-                            </p>
-                        </span>
-                    </div>
-                    <div class="stat">
-                        <span>
-                            <p class="position">
-                                <strong>00:10:51</strong>
-                            </p>
-                        </span>
-                    </div>
-                </div>
-            </article>
+            <h3 class="difficulty">Difficile</h3>
+            <?php createLeaderboard("hard", $_SESSION['id']) ?>
 
-            <article class="player-stats-display top2">
-                <img src="assets/images/top2.jpg" alt="Player's profile pic" />
-
-                <div class="player-stats">
-                    <div class="stat">
-                        <span>
-                            <h4>memorymaster</h4>
-                        </span>
-                    </div>
-                    <div class="stat">
-                        <span>
-                            <p class="position">
-                                <strong>2</strong>
-                            </p>
-                        </span>
-                    </div>
-                    <div class="stat">
-                        <span>
-                            <p class="position">
-                                <strong>00:11:23</strong>
-                            </p>
-                        </span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="player-stats-display top3">
-                <img src="assets/images/top3.jpg" alt="Player's profile pic" />
-
-                <div class="player-stats">
-                    <div class="stat">
-                        <span>
-                            <h4>xXBrainSlayerXx</h4>
-                        </span>
-                    </div>
-                    <div class="stat">
-                        <span>
-                            <p class="position">
-                                <strong>3</strong>
-                            </p>
-                        </span>
-                    </div>
-                    <div class="stat">
-                        <span>
-                            <p class="position">
-                                <strong>00:11:47</strong>
-                            </p>
-                        </span>
-                    </div>
-                </div>
-            </article>
-
-            <img src="assets/images/ornament.svg" id="ornament" />
-
-            <article class="player-stats-display">
-                <img src="assets/images/fromagelover.jpg" alt="Player's profile pic" />
-
-                <div class="player-stats">
-                    <div class="stat">
-                        <span>
-                            <h4>FromageLover</h4>
-                        </span>
-                    </div>
-                    <div class="stat">
-                        <span>
-                            <p class="position">
-                                <strong>419</strong>
-                            </p>
-                        </span>
-                    </div>
-                    <div class="stat">
-                        <span>
-                            <p class="position">
-                                <strong>00:36:03</strong>
-                            </p>
-                        </span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="player-stats-display" id="self-stats">
-                <img src="assets/images/player.jpg" alt="Player's profile pic" />
-
-                <div class="player-stats">
-                    <div class="stat">
-                        <span>
-                            <h4>VOUS</h4>
-                        </span>
-                    </div>
-                    <div class="stat">
-                        <span>
-                            <p class="position">
-                                <strong>420</strong>
-                            </p>
-                        </span>
-                    </div>
-                    <div class="stat">
-                        <span>
-                            <p class="position">
-                                <strong>00:36:24</strong>
-                            </p>
-                        </span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="player-stats-display">
-                <img src="assets/images/pierre92.jpg" alt="Player's profile pic" />
-
-                <div class="player-stats">
-                    <div class="stat">
-                        <span>
-                            <h4>Pierre92</h4>
-                        </span>
-                    </div>
-                    <div class="stat">
-                        <span>
-                            <p class="position">
-                                <strong>421</strong>
-                            </p>
-                        </span>
-                    </div>
-                    <div class="stat">
-                        <span>
-                            <p class="position">
-                                <strong>00:36:58</strong>
-                            </p>
-                        </span>
-                    </div>
-                </div>
-            </article>
         </section>
     </main>
 

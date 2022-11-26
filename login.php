@@ -46,45 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <a href="#login-banner"><button id="fixed-button">⏏</button></a>
 
-    <section id="chat-box">
-        <section id="chat-box-header">
-            <ul id="chat-list">
-                <li>Général</li>
-                <li id="selected-chat">Assistance</li>
-                <li>AndréLicorne</li>
-            </ul>
-        </section>
-
-        <section id="chat-box-main">
-            <article>
-                <p class="chat-msg">
-                    Bonjour ! Je suis le robot d'assistance de Power Of
-                    Memory. Posez-moi des questions si vous avez besoin
-                    d'aide !
-                </p>
-                <p class="chat-date">16:49</p>
-                <p class="chat-date">16:49</p>
-            </article>
-
-            <article>
-                <p class="chat-my-msg">Qu'est-ce que Power Of Memory</p>
-            </article>
-
-            <article>
-                <p class="chat-msg">
-                    Power Of Memory est avant tout un jeu de memory
-                </p>
-            </article>
-        </section>
-
-        <section id="chat-box-footer">
-            <form action="signup.php" method="POST">
-                <textarea type="text" name="text" id="text" placeholder="Message ..." required></textarea>
-                <input type="submit" name="send" value="Envoyer" />
-            </form>
-        </section>
-    </section>
-
     <main>
         <section class="banner" id="login-banner">
             <h2>CONNEXION</h2>

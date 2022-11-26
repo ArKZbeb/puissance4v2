@@ -6,7 +6,7 @@ session_start();
 /* ---------------------------- Connected or not ---------------------------- */
 if (isConnected()) {
     $result = "<li><a href='myaccount.php'>";
-    $result .= "<img class='header-profile-pic' src='assets/images/player.jpg' alt='User icon'/>";
+    $result .= "<img class='header-profile-pic' src='assets/images/profiles/" . getProfilePic($_SESSION['id']) . "' alt='User icon'/>";
     $result .= "</a></li>";
     $result .= "<li><a href='?logout'>";
     $result .= "Se déconnecter";

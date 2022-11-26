@@ -1,5 +1,6 @@
 <?php
 require('includes/database.inc.php');
+require('includes/session.inc.php');
 /* ------------------------------- Live stats ------------------------------- */
 $sql = "SELECT * FROM `score`";
 $request = $database->query($sql);
@@ -17,6 +18,12 @@ $highScore = round($result['MIN(score)'], 3);
 $sql = "SELECT * FROM `user`";
 $request = $database->query($sql);
 $NombreUtilisateur = $request->rowCount();
+
+if (isConnected()) {
+    $gameLink = "memory.php";
+} else {
+    $gameLink = "login.php";
+}
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +52,7 @@ $NombreUtilisateur = $request->rowCount();
             <h2>BIENVENUE DANS NOTRE STUDIO !</h2>
             <p>Venez challenger les cerveaux les plus agiles !</p>
 
-            <a href="register.php"><button id="play-button">JOUER !</button></a>
+            <a href="<?php echo $gameLink; ?>"><button id="play-button">JOUER !</button></a>
         </section>
 
         <section id="intro">
@@ -106,14 +113,14 @@ $NombreUtilisateur = $request->rowCount();
 
             <div class="stats-container">
                 <div class="stats-row">
-                    <article id="stat1" class="stat-display">
+                    <article class="stat-display stat1">
                         <h3>
                             <?php echo $nbrPartie ?>
                         </h3>
                         <h4>Parties Jouées</h4>
                     </article>
 
-                    <article id="stat2" class="stat-display">
+                    <article class="stat-display stat2">
                         <h3>
                             <?php echo $nbrOnline ?>
                         </h3>
@@ -122,14 +129,14 @@ $NombreUtilisateur = $request->rowCount();
                 </div>
 
                 <div class="stats-row">
-                    <article id="stat3" class="stat-display">
+                    <article class="stat-display stat3">
                         <h3>
                             <?php echo $highScore ?> sec
                         </h3>
                         <h4>Temps Record</h4>
                     </article>
 
-                    <article id="stat4" class="stat-display">
+                    <article class="stat-display stat4">
                         <h3>
                             <?php echo $NombreUtilisateur //variable ?></h3>
                         <h4>Joueurs Inscrits</h4>
